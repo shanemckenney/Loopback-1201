@@ -25,3 +25,52 @@ Designed by EdTech system architects and UX engineers for maximum efficiency:
 * **Data Storage:** Data-driven via a single `questions.json` file.
 * **Progress Tracking:** Client-side browser `localStorage` (no user logins, passwords, or databases required).
 * **Hosting:** Static deployment via **GitHub Pages**.
+
+┌────────────────┐       ┌─────────────────┐
+│   index.html   │ ──>   │  questions.json │
+└───────┬────────┘       └─────────────────┘
+        │
+        ▼
+┌────────────────┐
+│  localStorage  │  (Tracks daily completion status ✓)
+└────────────────┘
+---
+
+## 🚀 Quick Setup & Deployment Guide
+
+Deploy your own live instance in under **2 minutes**:
+
+1. **Fork or Upload Files:**
+   Place `index.html` and `questions.json` in the root directory of your GitHub repository.
+
+2. **Enable GitHub Pages:**
+   * Go to **Settings** ⚙️ → **Pages**.
+   * Under **Build and deployment**, select **Source: Deploy from a branch**.
+   * Set Branch to **`main`** / **`/root`** and click **Save**.
+
+3. **Share the URL:**
+   Your site will be live at `https://<your-username>.github.io/<repo-name>/`. Send this single link to your students!
+
+---
+
+## 📅 3-Week Content Roadmap
+
+| Week | Mon–Wed Focus (Auto-Graded Quizzes) | Thursday Capstone Scenario |
+| :--- | :--- | :--- |
+| **Week 1** | RAM, Storage Types, RAID, Power Issues, & Display Diagnostics | Motherboard, SODIMM Specs, & Install Constraints |
+| **Week 2** | Networking Protocols, Ports, Wi-Fi Channels, & Cable Testing | SOHO Wireless Router Deployment & Security Config |
+| **Week 3** | Printers, Cloud Models, Virtualization, & CLI Tools | Command Line Interface (`ipconfig`, `ping`, `tracert`) Diagnostics |
+
+---
+
+## ✏️ Customizing Content
+
+To update, fix typos, or add new questions, you **never need to edit `index.html`**. Simply open `questions.json` and adjust the text:
+
+```json
+{
+  "question": "Your custom question text here...",
+  "options": ["Option A", "Option B", "Option C", "Option D"],
+  "correct": 0,
+  "explanation": "Rationale for why Option A is correct."
+}

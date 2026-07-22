@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CompTIA A+ 1201 Retake Flight Deck</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { 
+      background-color: #0f172a; 
+      color: #f8fafc; 
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; 
+    }
+    .glass-card { 
+      background: rgba(30, 41, 59, 0.75); 
+      backdrop-filter: blur(12px); 
+      border: 1px solid rgba(255, 255, 255, 0.08); 
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+  <div class="max-w-4xl mx-auto space-y-6">
+    
+    <!-- HEADER -->
+    <header class="glass-card rounded-2xl p-6 text-center shadow-2xl">
+      <span class="text-xs font-bold tracking-widest text-cyan-400 uppercase bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-800/50">
+        CompTIA A+ Core 1 (220-1201)
+      </span>
+      <h1 class="text-3xl font-black text-white mt-3 tracking-tight">Daily Micro-Drip Engine</h1>
+      <p class="text-slate-400 text-sm mt-2 max-w-xl mx-auto">
+        10 minutes a day • Mon–Thu • Spaced Repetition for Retake Mastery
+      </p>
+    </header>
+
+    <!-- WEEK NAVIGATION TABS -->
+    <div id="week-tabs" class="flex justify-center gap-2"></div>
+
+    <!-- DAY NAVIGATION TABS -->
+    <div id="day-tabs" class="grid grid-cols-4 gap-2"></div>
+
+    <!-- MAIN APP CONTAINER -->
+    <main id="app-container" class="glass-card rounded-2xl p-6 shadow-2xl">
+      <div class="text-center text-slate-400 py-12">Loading study materials...</div>
+    </main>
+    
+  </div>
+
+  <script>
+    let appData = null;
+    let currentWeek = 1;
+    let currentDay = "Monday";
+
+    // Fetch question bank JSON
+    fetch('questions.json')
+      .then(res => res.json())
+      .then(data => {
+        appData = data;
+        renderWeekTabs();
+        renderDayTabs();
+        loadDayContent();
+      })
+      .catch(err => {
+        document.getElementById('app-container').innerHTML = 
+          `<div class="text-rose-400 text-center py-8 font-semibold">
+            Error loading questions.json. Ensure 'questions.json' is in the exact same GitHub directory as index.html.
+          </div>`;
+      });
+
+    function renderWeekTabs() {
+      const nav = document.getElementById('week-tabs');
+      nav.innerHTML = appData.weeks.map(w => `
+        <button onclick="switchWeek(${w.weekNumber})" 
+          class="px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${w.weekNumber === currentWeek ? 'bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/20' : 'bg-slate-800/80 text-slate-400 hover:text-white hover:bg-slate-800'}">
+          Week ${w.weekNumber}
+        </button>
+      `).join('');
+    }
+
+    function renderDayTabs() {
+      const days = ["Monday", "Tuesday", "Wednesday", "Thursday"];
+      const nav = document.getElementById('day-tabs');
+      nav.innerHTML = days.map(d => {
+        const isCompleted = localStorage.getItem(`w${currentWeek}_${d}_done`);
+        const isActive = d === currentDay;
+        return `
+          <button onclick="switchDay('${d}')" 
+            class="py-3 rounded-xl text-sm font-bold text-center transition-all relative ${isActive ? 'bg-slate-800 text-cyan-400 border border-cyan-500/50 shadow-md' : 'bg-slate-900/60 text-slate-400 hover:text-white hover:bg-slate-800/50'}">
+            ${d.substring(0, 3)}
+            ${isCompleted ? '<span class="absolute top-1.5 right-2 text-emerald-400 font-bold text-xs">✓</span>' : ''}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function switchWeek(w) { currentWeek = w; renderWeekTabs(); renderDayTabs(); loadDayContent(); }
+    function switchDay(d) { currentDay = d; renderDayTabs(); loadDayContent(); }
+
+    function loadDayContent() {
+      const container = document.getElementById('app-container');
+      const weekData = appData.weeks.find(w => w.weekNumber === currentWeek);
+      const dayData = weekData ? weekData.days[currentDay] : null;
+
+      if (!dayData) {
+        container.innerHTML = `<div class="text-center text-slate-400 py-8">No content assigned for this day.</div>`;
+        return;
+      }
+
+      if (currentDay === "Thursday") {
+        // THURSDAY PBQ CAPSTONE UI
+        container.innerHTML = `
+          <div class="space-y-5">
+            <div class="inline-block px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-full text-xs font-bold uppercase tracking-wider">
+              Thursday PBQ & Diagnostic Scenario
+            </div>
+            <h2 class="text-xl font-extrabold text-white">${dayData.title}</h2>
+            <div class="bg-slate-900/80 p-5 rounded-xl text-slate-300 text-sm leading-relaxed border border-slate-800 whitespace-pre-line font-mono">
+${dayData.scenario}
+            </div>
+            
+            <div class="space-y-3 pt-2">
+              <label class="block text-sm font-semibold text-slate-200">Your Diagnostic Plan & Steps:</label>
+              <textarea id="pbq-response" rows="4" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl p-3.5 text-sm text-slate-200 focus:outline-none focus:border-amber-500 transition" placeholder="Type your diagnostic steps here..."></textarea>
+              <button onclick="submitPBQ()" class="w-full py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 font-bold rounded-xl text-slate-950 text-sm shadow-lg transition">
+                Submit & View Model Solution
+              </button>
+            </div>
+
+            <div id="pbq-solution" class="hidden mt-6 p-5 bg-emerald-950/40 border border-emerald-500/40 rounded-xl space-y-2">
+              <h4 class="font-bold text-emerald-400 text-sm uppercase tracking-wider">Expert Model Solution:</h4>
+              <p class="text-sm text-emerald-200/90 leading-relaxed whitespace-pre-line">${dayData.solution}</p>
+            </div>
+          </div>
+        `;
+      } else {
+        // MON-WED MICRO QUIZ UI
+        container.innerHTML = `
+          <div class="space-y-6">
+            <div class="flex justify-between items-center">
+              <span class="inline-block px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 rounded-full text-xs font-bold uppercase tracking-wider">
+                ${currentDay} Micro-Drip
+              </span>
+              <span class="text-xs font-semibold text-slate-400">${dayData.questions.length} Questions</span>
+            </div>
+            
+            <form id="quiz-form" class="space-y-6">
+              ${dayData.questions.map((q, idx) => `
+                <div class="bg-slate-900/50 p-5 rounded-xl border border-slate-800 space-y-3">
+                  <p class="text-sm font-bold text-slate-100 leading-snug">${idx + 1}. ${q.question}</p>
+                  <div class="space-y-2">
+                    ${q.options.map((opt, oIdx) => `
+                      <label class="flex items-center gap-3 p-3 rounded-lg bg-slate-900/80 border border-slate-800/80 hover:border-slate-700 cursor-pointer text-sm text-slate-300 transition">
+                        <input type="radio" name="q_${idx}" value="${oIdx}" class="text-cyan-500 focus:ring-0">
+                        <span>${opt}</span>
+                      </label>
+                    `).join('')}
+                  </div>
+                  <div id="explanation_${idx}" class="hidden p-3.5 rounded-lg text-xs leading-relaxed mt-2 font-medium"></div>
+                </div>
+              `).join('')}
+              
+              <button type="button" onclick="gradeQuiz()" class="w-full py-3.5 bg-cyan-500 hover:bg-cyan-400 font-bold rounded-xl text-slate-950 text-sm shadow-lg shadow-cyan-500/10 transition">
+                Check Answers
+              </button>
+            </form>
+          </div>
+        `;
+      }
+    }
+
+    function gradeQuiz() {
+      const weekData = appData.weeks.find(w => w.weekNumber === currentWeek);
+      const dayData = weekData.days[currentDay];
+      
+      dayData.questions.forEach((q, idx) => {
+        const selected = document.querySelector(`input[name="q_${idx}"]:checked`);
+        const expBox = document.getElementById(`explanation_${idx}`);
+        expBox.classList.remove('hidden');
+
+        if (selected && parseInt(selected.value) === q.correct) {
+          expBox.className = "p-3.5 rounded-lg text-xs leading-relaxed mt-2 bg-emerald-950/60 border border-emerald-500/40 text-emerald-200";
+          expBox.innerHTML = `<strong class="text-emerald-400">✓ Correct!</strong> ${q.explanation}`;
+        } else {
+          expBox.className = "p-3.5 rounded-lg text-xs leading-relaxed mt-2 bg-rose-950/60 border border-rose-500/40 text-rose-200";
+          expBox.innerHTML = `<strong class="text-rose-400">✗ Incorrect.</strong> Correct answer: <em class="underline">${q.options[q.correct]}</em>.<br><br>${q.explanation}`;
+        }
+      });
+
+      localStorage.setItem(`w${currentWeek}_${currentDay}_done`, "true");
+      renderDayTabs();
+    }
+
+    function submitPBQ() {
+      document.getElementById('pbq-solution').classList.remove('hidden');
+      localStorage.setItem(`w${currentWeek}_${currentDay}_done`, "true");
+      renderDayTabs();
+    }
+  </script>
+</body>
+</html>

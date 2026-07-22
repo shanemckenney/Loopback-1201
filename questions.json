@@ -14,7 +14,16 @@
                 "Replace the laptop display panel assembly."
               ],
               "correct": 1,
-              "explanation": "CompTIA Methodology Trap: Always start with the simplest, least invasive diagnostic step. Reseating or isolating newly added hardware verifies module defect or seating error before jumping to invasive component replacements like BIOS flashing or motherboard replacement."
+              "explanation": "CompTIA Methodology Trap: Always start with the simplest, least invasive diagnostic step. Reseating or isolating newly added hardware verifies module defect or seating error before jumping to invasive component replacements like BIOS flashing or motherboard replacement.",
+              "guide": {
+                "keywords": ["after installing a second SODIMM stick", "screen remains completely black", "FIRST"],
+                "ignore": "Ignore keyboard LEDs lighting up—that just proves AC/battery power is present.",
+                "elimination": [
+                  "Eliminate Option A (Replacing motherboard violates the 'least invasive first' troubleshooting step).",
+                  "Eliminate Option D (Display panel is unlikely to break purely from inserting RAM)."
+                ],
+                "tippingPoint": "Between flashing BIOS vs. isolating RAM: Always back out the exact hardware change you just made before attempting firmware flashes."
+              }
             },
             {
               "question": "A custom workstation PC powers on, the CPU fan spins at high speed continuously, but there is no display output and no beep codes. The technician suspects a power delivery issue. Which tool should be used FIRST to test the PSU under load without opening the power supply housing?",
@@ -25,7 +34,16 @@
                 "Cable Tester"
               ],
               "correct": 1,
-              "explanation": "A specialized PSU tester provides immediate pin-by-pin status of the +12V, +5V, +3.3V, and +5VSB rails. A multimeter can measure voltage but requires manual back-probing of 24-pin connectors, making a dedicated PSU tester faster for Tier 1 triage."
+              "explanation": "A specialized PSU tester provides immediate pin-by-pin status of the +12V, +5V, +3.3V, and +5VSB rails. A multimeter can measure voltage but requires manual back-probing of 24-pin connectors, making a dedicated PSU tester faster for Tier 1 triage.",
+              "guide": {
+                "keywords": ["power delivery issue", "FIRST", "PSU under load"],
+                "ignore": "Ignore fan spinning speed—spinning fans only prove the 12V rail has partial power, not that all rails are healthy.",
+                "elimination": [
+                  "Eliminate Option C (Loopback plugs test NIC/serial ports, not power).",
+                  "Eliminate Option D (Cable testers verify Ethernet wire maps)."
+                ],
+                "tippingPoint": "Between Multimeter vs. Power Supply Tester: Multimeters require manual back-probing pin by pin. A Power Supply Tester is the fastest dedicated Tier 1 tool."
+              }
             },
             {
               "question": "An administrator needs to configure a storage array for a database server that requires maximum read/write performance and single-drive fault tolerance. The array has exactly two 2 TB NVMe drives. Which RAID level must be selected?",
@@ -36,7 +54,16 @@
                 "RAID 10"
               ],
               "correct": 1,
-              "explanation": "RAID 1 mirrors data across two drives, offering 1-drive fault tolerance. RAID 0 provides no fault tolerance (a single drive failure destroys the volume). RAID 5 requires a minimum of 3 drives, and RAID 10 requires a minimum of 4 drives."
+              "explanation": "RAID 1 mirrors data across two drives, offering 1-drive fault tolerance. RAID 0 provides no fault tolerance (a single drive failure destroys the volume). RAID 5 requires a minimum of 3 drives, and RAID 10 requires a minimum of 4 drives.",
+              "guide": {
+                "keywords": ["single-drive fault tolerance", "exactly two 2 TB NVMe drives"],
+                "ignore": "Ignore database server branding—focus strictly on disk count (2) and fault tolerance.",
+                "elimination": [
+                  "Eliminate Option A (RAID 0 has zero fault tolerance).",
+                  "Eliminate Option C & D (RAID 5 needs 3+ drives; RAID 10 needs 4+ drives)."
+                ],
+                "tippingPoint": "With only 2 disks available, RAID 1 is the only mirror format that satisfies single-drive fault tolerance."
+              }
             },
             {
               "question": "A field technician inspects a corporate laptop and notices the trackpad is lifting away from the chassis and the bottom casing is bulging. What action should the technician take immediately?",
@@ -47,7 +74,16 @@
                 "Puncture the outer pouch of the battery to safely vent trapped gas."
               ],
               "correct": 2,
-              "explanation": "Safety Hazard: Bulging trackpads or chassis panels indicate a swollen Lithium-ion battery. Swollen batteries pose severe fire and explosion risks. They must never be punctured, charged, or compressed, and must be safely isolated."
+              "explanation": "Safety Hazard: Bulging trackpads or chassis panels indicate a swollen Lithium-ion battery. Swollen batteries pose severe fire and explosion risks. They must never be punctured, charged, or compressed, and must be safely isolated.",
+              "guide": {
+                "keywords": ["trackpad is lifting", "bottom casing is bulging", "immediately"],
+                "ignore": "Ignore trackpad calibration software—this is a physical thermal safety hazard.",
+                "elimination": [
+                  "Eliminate Option A (Compressing a swollen battery causes fire/explosion).",
+                  "Eliminate Option D (Puncturing a battery causes thermal runaway)."
+                ],
+                "tippingPoint": "Physical battery distortion equals immediate hazardous material containment protocols."
+              }
             },
             {
               "question": "A user's laptop screen displays image artifacts, distorted colors, and screen flickering when the lid is adjusted or moved, but the display looks perfectly clean when connected to an external monitor via HDMI. Which component is failing?",
@@ -58,7 +94,16 @@
                 "LCD Backlight Lamp"
               ],
               "correct": 2,
-              "explanation": "Because the external monitor output is pristine, the GPU is functioning properly. Distortion that changes specifically when moving the physical laptop lid points directly to a damaged or pinched video flex/ribbon cable running through the display hinge."
+              "explanation": "Because the external monitor output is pristine, the GPU is functioning properly. Distortion that changes specifically when moving the physical laptop lid points directly to a damaged or pinched video flex/ribbon cable running through the display hinge.",
+              "guide": {
+                "keywords": ["when the lid is adjusted or moved", "external monitor via HDMI looks clean"],
+                "ignore": "Ignore display driver updates—the physical motion triggering the glitch proves a hardware connection issue.",
+                "elimination": [
+                  "Eliminate Option A (External monitor works clean, so GPU is healthy).",
+                  "Eliminate Option B (Inverter failure causes dim screen, not movement artifacts)."
+                ],
+                "tippingPoint": "Glitching tied directly to physical hinge movement = flex/ribbon cable wear."
+              }
             }
           ]
         },
@@ -73,7 +118,16 @@
                 "WINS Server"
               ],
               "correct": 1,
-              "explanation": "APIPA Trap: Addresses in the 169.254.0.1 to 169.254.255.254 range are automatically self-assigned by Windows when a client cannot obtain an IP address from a DHCP server. It does NOT indicate a DNS failure."
+              "explanation": "APIPA Trap: Addresses in the 169.254.0.1 to 169.254.255.254 range are automatically self-assigned by Windows when a client cannot obtain an IP address from a DHCP server. It does NOT indicate a DNS failure.",
+              "guide": {
+                "keywords": ["169.254.44.120", "unreachable or failing"],
+                "ignore": "Ignore network share permissions—focus on IP address assignment.",
+                "elimination": [
+                  "Eliminate Option A (DNS handles hostname resolution, not IP lease assignment).",
+                  "Eliminate Option C (Default Gateway routing happens after IP lease acquisition)."
+                ],
+                "tippingPoint": "169.254.x.x ALWAYS equals APIPA, which means DHCP contact failed."
+              }
             },
             {
               "question": "A network administrator needs to enforce secure remote command-line access to Linux web servers across the internet. Which port must be open on the perimeter firewall?",
@@ -84,7 +138,16 @@
                 "TCP Port 80"
               ],
               "correct": 1,
-              "explanation": "SSH (Secure Shell) uses TCP Port 22 for encrypted command-line management. Port 23 is unencrypted Telnet (security risk), Port 3389 is RDP (Windows graphical), and Port 80 is unencrypted HTTP."
+              "explanation": "SSH (Secure Shell) uses TCP Port 22 for encrypted command-line management. Port 23 is unencrypted Telnet (security risk), Port 3389 is RDP (Windows graphical), and Port 80 is unencrypted HTTP.",
+              "guide": {
+                "keywords": ["secure remote command-line", "Linux web servers"],
+                "ignore": "Ignore 'web servers'—the task specifies remote command-line access, not HTTP web browsing.",
+                "elimination": [
+                  "Eliminate Option A (Port 23 is unencrypted Telnet).",
+                  "Eliminate Option C (Port 3389 is Windows RDP, not Linux CLI)."
+                ],
+                "tippingPoint": "Secure CLI = SSH = Port 22."
+              }
             },
             {
               "question": "An office manager reports that mobile phones frequently drop Wi-Fi connections in a dense office space. The WAP is currently configured to use 2.4 GHz on Channel 3. Which adjustment will reduce co-channel interference from neighboring access points?",
@@ -95,7 +158,16 @@
                 "Disable WPA3 Encryption."
               ],
               "correct": 1,
-              "explanation": "In the 2.4 GHz spectrum, only channels 1, 6, and 11 are non-overlapping. Using channel 3 causes partial-frequency overlap and heavy interference from both channel 1 and channel 6 signals."
+              "explanation": "In the 2.4 GHz spectrum, only channels 1, 6, and 11 are non-overlapping. Using channel 3 causes partial-frequency overlap and heavy interference from both channel 1 and channel 6 signals.",
+              "guide": {
+                "keywords": ["2.4 GHz on Channel 3", "reduce co-channel interference"],
+                "ignore": "Ignore mobile phone brand—focus on 2.4 GHz Wi-Fi channel design rules.",
+                "elimination": [
+                  "Eliminate Option A (40 MHz width in 2.4 GHz increases interference).",
+                  "Eliminate Option C & D (SSID and Encryption do not change RF frequency overlap)."
+                ],
+                "tippingPoint": "In 2.4 GHz Wi-Fi, the ONLY non-overlapping channels are 1, 6, and 11."
+              }
             },
             {
               "question": "A technician is crimping new Cat 6 cables for an office installation that requires the T568B wiring standard on both ends. What is the correct pin order from Pin 1 to Pin 8?",
@@ -106,7 +178,16 @@
                 "White, Orange, White, Green, White, Blue, White, Brown"
               ],
               "correct": 1,
-              "explanation": "T568B Pinout: Pin 1: Orange/White, Pin 2: Orange, Pin 3: Green/White, Pin 4: Blue, Pin 5: Blue/White, Pin 6: Green, Pin 7: Brown/White, Pin 8: Brown."
+              "explanation": "T568B Pinout: Pin 1: Orange/White, Pin 2: Orange, Pin 3: Green/White, Pin 4: Blue, Pin 5: Blue/White, Pin 6: Green, Pin 7: Brown/White, Pin 8: Brown.",
+              "guide": {
+                "keywords": ["T568B wiring standard", "Pin 1 to Pin 8"],
+                "ignore": "Ignore Cat 6 vs Cat 5e—T568B pinout order is identical.",
+                "elimination": [
+                  "Eliminate Option A (Starts with Green/White—that is T568A).",
+                  "Eliminate Option D (Made up pattern missing pair striping)."
+                ],
+                "tippingPoint": "T568B starts with Orange/White, Orange, Green/White."
+              }
             },
             {
               "question": "A field technician suspecting a cable run failure plugs a device into a wall jack. The network card link light does not illuminate. Which tool should the technician use to trace the physical cable through the wall back to the patch panel?",
@@ -117,7 +198,16 @@
                 "Protocol Analyzer"
               ],
               "correct": 1,
-              "explanation": "A tone generator connects to one end of the cable to emit an audible tone signal, and the inductive probe is used along walls/patch panels to physically locate and identify that specific wire run."
+              "explanation": "A tone generator connects to one end of the cable to emit an audible tone signal, and the inductive probe is used along walls/patch panels to physically locate and identify that specific wire run.",
+              "guide": {
+                "keywords": ["trace the physical cable through the wall", "back to the patch panel"],
+                "ignore": "Ignore network card link light status—focus on the task of physical cable tracing.",
+                "elimination": [
+                  "Eliminate Option C (Loopback plug tests local port TX/RX, does not trace cables).",
+                  "Eliminate Option D (Protocol analyzer inspects packet data, not copper runs)."
+                ],
+                "tippingPoint": "Tracing physical hidden cable runs = Tone Generator & Probe."
+              }
             }
           ]
         },
@@ -132,10 +222,19 @@
                 "Duplexing Assembly"
               ],
               "correct": 1,
-              "explanation": "Ghosting is caused by a photosensitive drum failing to completely discharge previous electrical charges or a dirty fuser roller retaining residual toner from prior rotations."
+              "explanation": "Ghosting is caused by a photosensitive drum failing to completely discharge previous electrical charges or a dirty fuser roller retaining residual toner from prior rotations.",
+              "guide": {
+                "keywords": ["faint copy", "repeats repeatedly every 3 inches", "ghosting"],
+                "ignore": "Ignore image header content—focus on print artifact repeating distance.",
+                "elimination": [
+                  "Eliminate Option C (Pickup rollers feed paper from trays).",
+                  "Eliminate Option D (Duplexing assembly flips paper for double-sided printing)."
+                ],
+                "tippingPoint": "Repeating residual images ('ghosting') = Drum or Fuser roller rotation."
+              }
             },
             {
-              "question": "An enterprise enterprise deployment requires virtualizing 50 Windows Server instances on a dedicated cluster of high-end physical hardware without a host OS installed underneath. Which software architecture is required?",
+              "question": "An enterprise deployment requires virtualizing 50 Windows Server instances on a dedicated cluster of high-end physical hardware without a host OS installed underneath. Which software architecture is required?",
               "options": [
                 "Type 2 Hypervisor",
                 "Type 1 Bare-Metal Hypervisor",
@@ -143,7 +242,16 @@
                 "Software as a Service (SaaS)"
               ],
               "correct": 1,
-              "explanation": "Type 1 hypervisors (e.g., VMware ESXi, Microsoft Hyper-V Server, Proxmox) install directly onto the physical hardware bare metal without requiring an underlying host operating system, maximizing performance and resource control."
+              "explanation": "Type 1 hypervisors (e.g., VMware ESXi, Microsoft Hyper-V Server, Proxmox) install directly onto the physical hardware bare metal without requiring an underlying host operating system, maximizing performance and resource control.",
+              "guide": {
+                "keywords": ["without a host OS installed underneath", "dedicated cluster of physical hardware"],
+                "ignore": "Ignore count of Windows Server instances (50)—focus on hypervisor installation location.",
+                "elimination": [
+                  "Eliminate Option A (Type 2 hypervisors require a host OS like Windows 11 underneath).",
+                  "Eliminate Option D (SaaS is an application delivery model, not a hypervisor)."
+                ],
+                "tippingPoint": "Direct hardware installation without host OS = Type 1 Bare-Metal."
+              }
             },
             {
               "question": "A cloud customer provisions virtual servers, configures virtual firewalls, and installs custom databases, but does not manage the underlying physical hypervisor hosts or datacenter cooling. Which cloud service model is being used?",
@@ -154,7 +262,16 @@
                 "DaaS (Desktop as a Service)"
               ],
               "correct": 2,
-              "explanation": "IaaS provides fundamental computing infrastructure (VMs, networks, storage). The customer maintains the guest OS, applications, and network configs, while the provider manages physical hardware."
+              "explanation": "IaaS provides fundamental computing infrastructure (VMs, networks, storage). The customer maintains the guest OS, applications, and network configs, while the provider manages physical hardware.",
+              "guide": {
+                "keywords": ["provisions virtual servers", "installs custom databases", "does not manage underlying physical hypervisor"],
+                "ignore": "Ignore datacenter cooling mention—focus on customer managing OS/VM layer.",
+                "elimination": [
+                  "Eliminate Option A (SaaS provides ready-to-use software like Office 365).",
+                  "Eliminate Option B (PaaS hides OS management and provides application deployment frameworks)."
+                ],
+                "tippingPoint": "Managing OS, VMs, and Virtual Firewalls = Infrastructure as a Service (IaaS)."
+              }
             },
             {
               "question": "A barcode thermal printer in a warehouse prints labels that are extremely light, faded, and missing sections of barcode lines. No ink or toner is used by this printer. Which maintenance task should be performed FIRST?",
@@ -165,7 +282,16 @@
                 "Refill the thermal wax ribbon reservoir."
               ],
               "correct": 1,
-              "explanation": "Direct thermal printers use heat-sensitive paper and no toner/ink/ribbon. Faded or incomplete prints are typically caused by dirt, wax, or adhesive buildup on the heating elements of the thermal printhead."
+              "explanation": "Direct thermal printers use heat-sensitive paper and no toner/ink/ribbon. Faded or incomplete prints are typically caused by dirt, wax, or adhesive buildup on the heating elements of the thermal printhead.",
+              "guide": {
+                "keywords": ["thermal printer", "No ink or toner is used", "FIRST"],
+                "ignore": "Ignore warehouse location—focus on printer technology mechanics.",
+                "elimination": [
+                  "Eliminate Option A & C (Corona wires and fusers are laser printer parts).",
+                  "Eliminate Option D (Direct thermal uses no ribbon)."
+                ],
+                "tippingPoint": "Direct thermal fading = Clean heating elements on thermal printhead with alcohol."
+              }
             },
             {
               "question": "A technician wants to verify if a remote server is reachable and measure the round-trip latency across the network. Which command line tool provides this capability?",
@@ -176,7 +302,16 @@
                 "ipconfig /all"
               ],
               "correct": 1,
-              "explanation": "`ping` uses ICMP Echo Request messages to verify basic network connectivity and measure latency (round-trip time in milliseconds)."
+              "explanation": "`ping` uses ICMP Echo Request messages to verify basic network connectivity and measure latency (round-trip time in milliseconds).",
+              "guide": {
+                "keywords": ["reachable", "measure the round-trip latency"],
+                "ignore": "Ignore server OS type—ICMP ping works universally.",
+                "elimination": [
+                  "Eliminate Option A (nslookup tests DNS resolution).",
+                  "Eliminate Option C (netstat shows local active port connections)."
+                ],
+                "tippingPoint": "Testing reachability + millisecond latency = ping."
+              }
             }
           ]
         },
@@ -201,7 +336,16 @@
                 "Mismatched RAM Speed"
               ],
               "correct": 1,
-              "explanation": "Symptom Analysis: Thermal protection safeguards shut down the CPU when safe temperature thresholds are breached. The system boots after cooling down for 30 minutes, confirming thermal shutdown (e.g., dried thermal paste, failed pump, or detached heatsink)."
+              "explanation": "Symptom Analysis: Thermal protection safeguards shut down the CPU when safe temperature thresholds are breached. The system boots after cooling down for 30 minutes, confirming thermal shutdown (e.g., dried thermal paste, failed pump, or detached heatsink).",
+              "guide": {
+                "keywords": ["shuts down abruptly", "turned back on immediately powers off", "left off for 30 minutes boots normally"],
+                "ignore": "Ignore HD rendering application—focus on temperature time cycle.",
+                "elimination": [
+                  "Eliminate Option A (Software corruption doesn't fix itself by waiting 30 mins).",
+                  "Eliminate Option C (Drive errors cause BSODs or boot errors, not heat shutdowns)."
+                ],
+                "tippingPoint": "Shutdowns tied to time cooling down = Thermal CPU shutdown."
+              }
             },
             {
               "question": "A desktop motherboard needs to support an ultra-fast modern M.2 NVMe SSD. The technician notices three M.2 slots with different keying notches. Which M.2 slot keying supports x4 PCIe lanes for NVMe drives?",
@@ -212,7 +356,16 @@
                 "B Key"
               ],
               "correct": 2,
-              "explanation": "M Key M.2 slots utilize up to 4 PCIe lanes (PCIe x4), enabling maximum transfer speeds for NVMe SSDs. B Key slots use PCIe x2 / SATA."
+              "explanation": "M Key M.2 slots utilize up to 4 PCIe lanes (PCIe x4), enabling maximum transfer speeds for NVMe SSDs. B Key slots use PCIe x2 / SATA.",
+              "guide": {
+                "keywords": ["M.2 slot keying", "x4 PCIe lanes for NVMe"],
+                "ignore": "Ignore motherboard brand—focus on M.2 keying definitions.",
+                "elimination": [
+                  "Eliminate Option A & B (A and E keys are used for Wi-Fi/Bluetooth cards).",
+                  "Eliminate Option D (B key supports SATA or PCIe x2)."
+                ],
+                "tippingPoint": "M Key = NVMe x4 lanes."
+              }
             },
             {
               "question": "A user reports that every time their desktop computer is unplugged from the wall outlet or moved to a different desk, the system time resets to January 1, 2000, and browser certificate warnings appear. What component must be replaced?",
@@ -223,7 +376,16 @@
                 "Trusted Platform Module (TPM)"
               ],
               "correct": 1,
-              "explanation": "The CR2032 CMOS battery maintains volatile CMOS memory and keeps the Real-Time Clock (RTC) running when AC power is disconnected."
+              "explanation": "The CR2032 CMOS battery maintains volatile CMOS memory and keeps the Real-Time Clock (RTC) running when AC power is disconnected.",
+              "guide": {
+                "keywords": ["unplugged from the wall", "system time resets to January 1, 2000"],
+                "ignore": "Ignore browser certificate warnings—clock reset causes certificate date verification failures.",
+                "elimination": [
+                  "Eliminate Option A (PSU provides AC to DC power, does not hold time state).",
+                  "Eliminate Option D (TPM holds encryption keys, not clock time)."
+                ],
+                "tippingPoint": "System date loss upon unplugging AC = Dead CR2032 CMOS battery."
+              }
             },
             {
               "question": "A user wants to connect three 4K displays, a wired keyboard, a mouse, an Ethernet cable, and external speakers to their laptop using a single cable connection. Which technology provides sufficient bandwidth?",
@@ -234,7 +396,16 @@
                 "eSATAp"
               ],
               "correct": 1,
-              "explanation": "Thunderbolt 4 delivers 40 Gbps bidirectional throughput, capable of driving multiple high-resolution 4K displays alongside USB data, audio, and high-power delivery over a single Type-C cable."
+              "explanation": "Thunderbolt 4 delivers 40 Gbps bidirectional throughput, capable of driving multiple high-resolution 4K displays alongside USB data, audio, and high-power delivery over a single Type-C cable.",
+              "guide": {
+                "keywords": ["three 4K displays", "single cable connection"],
+                "ignore": "Ignore keyboard and mouse bandwidth—displays dominate throughput requirements.",
+                "elimination": [
+                  "Eliminate Option A (USB 3.0 Type-A lacks bandwidth for three 4K monitors).",
+                  "Eliminate Option C (HDMI carries video/audio only, not Ethernet/USB dock data)."
+                ],
+                "tippingPoint": "Multi-4K video + Ethernet + data on 1 cable = Thunderbolt 4 (40 Gbps)."
+              }
             },
             {
               "question": "A field technician needs to quickly connect two PCs directly to transfer files without using a switch or router. The network cards do not support Auto-MDIX. What type of cable is required?",
@@ -245,7 +416,16 @@
                 "Coaxial RG-59 Cable"
               ],
               "correct": 1,
-              "explanation": "Without Auto-MDIX (which automatically adjusts pin functions), connecting two like networking devices (PC-to-PC, or Switch-to-Switch) directly requires a Crossover Cable to swap the Transmit (TX) and Receive (RX) pairs."
+              "explanation": "Without Auto-MDIX (which automatically adjusts pin functions), connecting two like networking devices (PC-to-PC, or Switch-to-Switch) directly requires a Crossover Cable to swap the Transmit (TX) and Receive (RX) pairs.",
+              "guide": {
+                "keywords": ["connect two PCs directly", "do not support Auto-MDIX"],
+                "ignore": "Ignore file transfer protocol—focus on Layer 1 physical pinouts.",
+                "elimination": [
+                  "Eliminate Option A (Straight-through connects unlike devices e.g. PC to Switch).",
+                  "Eliminate Option C (Rollover cable connects serial console ports)."
+                ],
+                "tippingPoint": "Direct PC-to-PC connection without Auto-MDIX = Crossover Cable."
+              }
             }
           ]
         },
@@ -260,7 +440,16 @@
                 "DNS is misconfigured on the switch."
               ],
               "correct": 0,
-              "explanation": "If a switch port is misassigned to an isolated or incorrect VLAN, the client will be logically separated from the default gateway's broadcast domain, preventing local and external routing despite physical link connectivity."
+              "explanation": "If a switch port is misassigned to an isolated or incorrect VLAN, the client will be logically separated from the default gateway's broadcast domain, preventing local and external routing despite physical link connectivity.",
+              "guide": {
+                "keywords": ["link light turns green", "pinging default gateway times out", "managed switch port"],
+                "ignore": "Ignore 'newly built computer'—focus on switch configuration mismatch.",
+                "elimination": [
+                  "Eliminate Option B (Half-duplex causes slow speed/collisions, not ping timeouts).",
+                  "Eliminate Option C (Computers use AC power supplies, not PoE)."
+                ],
+                "tippingPoint": "Physical link light green + local gateway unreachable = Switch port in wrong VLAN."
+              }
             },
             {
               "question": "A network administrator installs several IP surveillance cameras that require 25 Watts of power each via Ethernet cabling. Which standard must the network switch support?",
@@ -271,7 +460,16 @@
                 "802.11ac Wi-Fi"
               ],
               "correct": 1,
-              "explanation": "PoE+ (IEEE 802.3at) supplies up to 30 Watts of power per port, accommodating power requirements over 15.4W (which was the limit for legacy 802.3af PoE)."
+              "explanation": "PoE+ (IEEE 802.3at) supplies up to 30 Watts of power per port, accommodating power requirements over 15.4W (which was the limit for legacy 802.3af PoE).",
+              "guide": {
+                "keywords": ["25 Watts of power", "via Ethernet cabling"],
+                "ignore": "Ignore camera video resolution—focus strictly on wattage requirements.",
+                "elimination": [
+                  "Eliminate Option A (Legacy 802.3af maxes out at 15.4 Watts).",
+                  "Eliminate Option C & D (Routing and Wi-Fi do not supply DC power)."
+                ],
+                "tippingPoint": "Power over Ethernet above 15.4W (up to 30W) = PoE+ (802.3at)."
+              }
             },
             {
               "question": "A user reports that entering 'http://internalhr' in their web browser fails to load, but entering 'http://10.0.4.50' opens the page immediately. Which network setting on the workstation should be checked FIRST?",
@@ -282,7 +480,15 @@
                 "MAC Address Whitelist"
               ],
               "correct": 1,
-              "explanation": "Classic CompTIA Diagnostic Rule: If reaching a host via IP address works, but reaching it via hostname fails, the issue is DNS resolution."
+              "explanation": "Classic CompTIA Diagnostic Rule: If reaching a host via IP address works, but reaching it via hostname fails, the issue is DNS resolution.",
+              "guide": {
+                "keywords": ["http://internalhr fails", "http://10.0.4.50 opens page immediately", "FIRST"],
+                "ignore": "Ignore web browser brand—focus on resolution layer.",
+                "elimination": [
+                  "Eliminate Option A & C (IP routing works fine as proven by 10.0.4.50 loading)."
+                ],
+                "tippingPoint": "IP works + Hostname fails = DNS failure."
+              }
             },
             {
               "question": "A corporate workstation configured with a static IP address cannot communicate on the network. A technician discovers another machine on the subnet was accidentally assigned the exact same IP address. What symptom occurs on the workstation?",
@@ -293,7 +499,16 @@
                 "The router automatically changes its subnet mask."
               ],
               "correct": 1,
-              "explanation": "An IP address conflict causes ARP table flapping on switches/routers, leading to dropped packets, loss of session state, and diagnostic OS error popups."
+              "explanation": "An IP address conflict causes ARP table flapping on switches/routers, leading to dropped packets, loss of session state, and diagnostic OS error popups.",
+              "guide": {
+                "keywords": ["exact same IP address", "symptom occurs"],
+                "ignore": "Ignore machine chassis type—focus on Layer 3 ARP table conflicts.",
+                "elimination": [
+                  "Eliminate Option A (APIPA only triggers if DHCP request fails, not on static duplicate).",
+                  "Eliminate Option C (Promiscuous mode is packet sniffing, unrelated to IP duplicates)."
+                ],
+                "tippingPoint": "Duplicate IP = Network ARP confusion & IP Conflict Error."
+              }
             },
             {
               "question": "Which command-line tool on Windows displays active TCP connections, listening ports, and protocol statistics?",
@@ -304,7 +519,16 @@
                 "ipconfig /renew"
               ],
               "correct": 1,
-              "explanation": "`netstat` (Network Statistics) displays active TCP connections, listening ports, network statistics, and routing tables."
+              "explanation": "`netstat` (Network Statistics) displays active TCP connections, listening ports, network statistics, and routing tables.",
+              "guide": {
+                "keywords": ["active TCP connections", "listening ports"],
+                "ignore": "Ignore Windows version—netstat syntax is constant.",
+                "elimination": [
+                  "Eliminate Option A (tracert traces network hops).",
+                  "Eliminate Option C (nslookup queries DNS records)."
+                ],
+                "tippingPoint": "Listening ports & active connections = netstat."
+              }
             }
           ]
         },
@@ -319,7 +543,16 @@
                 "Install additional registered ECC DDR4 RAM."
               ],
               "correct": 1,
-              "explanation": "High I/O wait times despite low CPU/RAM usage indicate a disk storage bottleneck. Moving from mechanical hard drives to high-IOPS NVMe SSD storage resolves VM disk queue delays."
+              "explanation": "High I/O wait times despite low CPU/RAM usage indicate a disk storage bottleneck. Moving from mechanical hard drives to high-IOPS NVMe SSD storage resolves VM disk queue delays.",
+              "guide": {
+                "keywords": ["CPU 15%", "RAM 40%", "Storage I/O wait times are extremely high"],
+                "ignore": "Ignore accounting software brand—focus on performance metric bottleneck.",
+                "elimination": [
+                  "Eliminate Option A & D (CPU and RAM are barely utilized at 15% and 40%).",
+                  "Eliminate Option C (Database servers do not use GPU rendering)."
+                ],
+                "tippingPoint": "High Storage I/O Wait = Upgrade mechanical disks to NVMe SSD arrays."
+              }
             },
             {
               "question": "Before deploying a critical operating system patch to a production Virtual Machine, an administrator wants to save the current running state so the VM can be instantly reverted if the patch breaks applications. What feature should be used?",
@@ -330,7 +563,16 @@
                 "VDI Profile Migration"
               ],
               "correct": 1,
-              "explanation": "A VM Snapshot captures the exact state, memory, and disk status of a virtual machine at a specific point in time, enabling instant rollback if updates cause failures."
+              "explanation": "A VM Snapshot captures the exact state, memory, and disk status of a virtual machine at a specific point in time, enabling instant rollback if updates cause failures.",
+              "guide": {
+                "keywords": ["save the current running state", "instantly reverted"],
+                "ignore": "Ignore OS patch details—focus on virtualization management features.",
+                "elimination": [
+                  "Eliminate Option A (Cloning creates a permanent duplicate VM, not a point-in-time state rollback).",
+                  "Eliminate Option C (Resource pooling allocates CPU/RAM limits)."
+                ],
+                "tippingPoint": "Point-in-time state save with instant rollback = VM Snapshot."
+              }
             },
             {
               "question": "A financial firm requires a cloud infrastructure solution that is shared exclusively among five vetted banking institutions to meet strict regulatory compliance standards. Which cloud deployment model must be used?",
@@ -341,7 +583,16 @@
                 "Hybrid Cloud"
               ],
               "correct": 1,
-              "explanation": "A Community Cloud is shared specifically by organizations that have mutual security, compliance, or operational requirements."
+              "explanation": "A Community Cloud is shared specifically by organizations that have mutual security, compliance, or operational requirements.",
+              "guide": {
+                "keywords": ["shared exclusively among five vetted banking institutions", "compliance standards"],
+                "ignore": "Ignore specific financial data types—focus on cloud sharing definitions.",
+                "elimination": [
+                  "Eliminate Option A (Public cloud is open to general public).",
+                  "Eliminate Option C (Private cloud is dedicated to ONE single organization)."
+                ],
+                "tippingPoint": "Shared between multiple specific organizations with shared goals = Community Cloud."
+              }
             },
             {
               "question": "An administrator receives multiple helpdesk tickets stating that printed documents from an office laser printer contain vertical black lines running down every page. What is the cause?",
@@ -352,7 +603,16 @@
                 "Incorrect paper weight selected"
               ],
               "correct": 0,
-              "explanation": "Vertical black lines running down the entire page indicate a scratched or dirty photosensitive drum, or a dirty primary corona/charge wire depositing continuous lines of toner."
+              "explanation": "Vertical black lines running down the entire page indicate a scratched or dirty photosensitive drum, or a dirty primary corona/charge wire depositing continuous lines of toner.",
+              "guide": {
+                "keywords": ["vertical black lines", "running down every page"],
+                "ignore": "Ignore document text—focus on print defect patterns.",
+                "elimination": [
+                  "Eliminate Option B (Empty toner causes faint pages, not black lines).",
+                  "Eliminate Option C (Low fuser heat causes smudging toner that rubs off)."
+                ],
+                "tippingPoint": "Continuous vertical black lines = Scratched drum / dirty primary corona wire."
+              }
             },
             {
               "question": "A technician is setting up a new virtualized developer workstation. The developer needs to run three concurrent guest VMs, each requiring 8 GB of RAM. The host OS requires 8 GB of RAM. What is the MINIMUM physical RAM required on the host system?",
@@ -363,7 +623,15 @@
                 "64 GB"
               ],
               "correct": 2,
-              "explanation": "Resource Math: (3 VMs × 8 GB RAM) = 24 GB for guests. Adding 8 GB for the host OS equals 32 GB RAM total."
+              "explanation": "Resource Math: (3 VMs × 8 GB RAM) = 24 GB for guests. Adding 8 GB for the host OS equals 32 GB RAM total.",
+              "guide": {
+                "keywords": ["three concurrent guest VMs", "each requiring 8 GB", "host OS requires 8 GB", "MINIMUM"],
+                "ignore": "Ignore developer OS environment—do the basic multiplication and addition.",
+                "elimination": [
+                  "Eliminate Option A & B (16 GB and 24 GB will starve the host OS or crash VMs)."
+                ],
+                "tippingPoint": "(3 × 8 GB) + 8 GB = 32 GB minimum RAM."
+              }
             }
           ]
         },
@@ -388,7 +656,16 @@
                 "Implement preventative measures."
               ],
               "correct": 1,
-              "explanation": "CompTIA 6-Step Order: 1) Identify problem, 2) Establish theory of probable cause, 3) Test theory to determine cause, 4) Establish plan of action & implement solution, 5) Verify full system functionality, 6) Document findings."
+              "explanation": "CompTIA 6-Step Order: 1) Identify problem, 2) Establish theory of probable cause, 3) Test theory to determine cause, 4) Establish plan of action & implement solution, 5) Verify full system functionality, 6) Document findings.",
+              "guide": {
+                "keywords": ["CompTIA 6-Step", "IMMEDIATELY after establishing a theory"],
+                "ignore": "Ignore real-world shortcuts—CompTIA requires strict adherence to their 6-step order.",
+                "elimination": [
+                  "Eliminate Option A (Documentation is Step 6, the final step).",
+                  "Eliminate Option C (Plan of action is Step 4, after testing theory)."
+                ],
+                "tippingPoint": "Step 2 is Theory -> Step 3 is Test Theory."
+              }
             },
             {
               "question": "A user brings in a smartphone that charges very slowly and frequently disconnects from the charging cable unless the cable is held at an angle. The technician tests three working cables and the issue persists. What should the technician do FIRST?",
@@ -399,7 +676,16 @@
                 "Factory reset the mobile operating system."
               ],
               "correct": 1,
-              "explanation": "CompTIA Tier 1 Mobile Fix: Debris or lint compacted inside lightning/USB-C charging ports prevents full physical seating of charging cable pins. Inspecting and cleaning with a wooden/plastic pick is the least invasive, most effective first step."
+              "explanation": "CompTIA Tier 1 Mobile Fix: Debris or lint compacted inside lightning/USB-C charging ports prevents full physical seating of charging cable pins. Inspecting and cleaning with a wooden/plastic pick is the least invasive, most effective first step.",
+              "guide": {
+                "keywords": ["disconnects unless cable held at an angle", "tests three working cables", "FIRST"],
+                "ignore": "Ignore OS settings—physical port loose connection is a hardware fit issue.",
+                "elimination": [
+                  "Eliminate Option A & C (Replacing board or battery before inspecting port violates simple fix rules).",
+                  "Eliminate Option D (OS resets do not fix physical port contact)."
+                ],
+                "tippingPoint": "Loose physical cable fit = Clean lint out of port with non-conductive pick."
+              }
             },
             {
               "question": "A mobile device user reports that their corporate smartphone becomes extremely hot to the touch and the battery drains from 100% to 0% in under two hours, even when idle. What is the primary troubleshooting action?",
@@ -410,7 +696,16 @@
                 "Submerge the phone in ice water."
               ],
               "correct": 0,
-              "explanation": "Sudden heat generation and rapid battery drain are typically caused by misbehaving background applications stuck in processing loops, causing continuous CPU utilization."
+              "explanation": "Sudden heat generation and rapid battery drain are typically caused by misbehaving background applications stuck in processing loops, causing continuous CPU utilization.",
+              "guide": {
+                "keywords": ["extremely hot to the touch", "drains from 100% to 0% in under two hours"],
+                "ignore": "Ignore hardware replacements initially—check software background tasks first.",
+                "elimination": [
+                  "Eliminate Option B (Screens don't generate sudden excessive heat loops).",
+                  "Eliminate Option D (Submerging phone causes water damage)."
+                ],
+                "tippingPoint": "Sudden heat + rapid drain = Inspect battery usage for runaway background apps."
+              }
             },
             {
               "question": "A corporate tablet screen registers touches 2 inches away from where the user actually taps the glass display. What calibration or component task is required?",
@@ -421,7 +716,15 @@
                 "Replace the LCD backlight assembly."
               ],
               "correct": 0,
-              "explanation": "When touch inputs register inaccurately across a display, running the built-in digitizer calibration tool aligns spatial coordinates."
+              "explanation": "When touch inputs register inaccurately across a display, running the built-in digitizer calibration tool aligns spatial coordinates.",
+              "guide": {
+                "keywords": ["registers touches 2 inches away", "actually taps"],
+                "ignore": "Ignore screen glass cleanliness—this is a spatial coordinate mapping issue.",
+                "elimination": [
+                  "Eliminate Option B & D (GPU and Backlight affect image display, not touch input mapping)."
+                ],
+                "tippingPoint": "Inaccurate touch target location = Recalibrate touch screen digitizer."
+              }
             },
             {
               "question": "Which technology allows a smartphone to make contactless payments at retail point-of-sale (POS) terminals within 4 centimeters?",
@@ -432,7 +735,16 @@
                 "RFID Active Tags"
               ],
               "correct": 0,
-              "explanation": "NFC operates over very short distances (under 4 cm / 1.5 inches), securing contactless mobile payment transactions (e.g., Apple Pay, Google Pay)."
+              "explanation": "NFC operates over very short distances (under 4 cm / 1.5 inches), securing contactless mobile payment transactions (e.g., Apple Pay, Google Pay).",
+              "guide": {
+                "keywords": ["contactless payments", "within 4 centimeters"],
+                "ignore": "Ignore smartphone OS—payment chip standards are identical.",
+                "elimination": [
+                  "Eliminate Option B (Infrared requires direct line-of-sight optical beam).",
+                  "Eliminate Option C (Bluetooth range is ~10 meters, too wide for secure touch payments)."
+                ],
+                "tippingPoint": "Contactless payment within 4 cm = NFC."
+              }
             }
           ]
         },
@@ -447,7 +759,16 @@
                 "Dual-rail PSU and Sound Card"
               ],
               "correct": 0,
-              "explanation": "CAD/CAM Workstation Requirements: Complex 3D rendering and vector geometry demand high multicore processing performance paired with dedicated workstation-grade GPUs."
+              "explanation": "CAD/CAM Workstation Requirements: Complex 3D rendering and vector geometry demand high multicore processing performance paired with dedicated workstation-grade GPUs.",
+              "guide": {
+                "keywords": ["CAD/CAM engineering designer", "highest prioritization"],
+                "ignore": "Ignore case design—focus on computational rendering requirements.",
+                "elimination": [
+                  "Eliminate Option B (Liquid nitrogen is for extreme overclocking, not enterprise CAD).",
+                  "Eliminate Option C (TV tuners are for media PCs)."
+                ],
+                "tippingPoint": "CAD/CAM = High Multicore CPU + Dedicated Workstation GPU."
+              }
             },
             {
               "question": "An administrator wants to deploy a Network Attached Storage (NAS) device for small business file sharing. Which hard drive characteristics are most important?",
@@ -458,7 +779,16 @@
                 "Thick client graphics acceleration"
               ],
               "correct": 0,
-              "explanation": "NAS deployments run continuously (24/7/365) with high multi-user access loads, requiring specialized NAS-rated drives built for vibration resistance and heavy duty cycles."
+              "explanation": "NAS deployments run continuously (24/7/365) with high multi-user access loads, requiring specialized NAS-rated drives built for vibration resistance and heavy duty cycles.",
+              "guide": {
+                "keywords": ["Network Attached Storage (NAS)", "file sharing"],
+                "ignore": "Ignore business industry type—focus on drive duty cycle specs.",
+                "elimination": [
+                  "Eliminate Option C (IDE is an obsolete 1990s parallel ribbon standard).",
+                  "Eliminate Option D (NAS storage appliances do not use graphics acceleration)."
+                ],
+                "tippingPoint": "NAS Storage = 24/7 Continuous Operation RAID-rated drives."
+              }
             },
             {
               "question": "Which network translation protocol converts multiple private internal IP addresses (e.g., 192.168.1.0/24) into a single public IP address using unique source port numbers?",
@@ -469,7 +799,16 @@
                 "DNS Pointer Record (PTR)"
               ],
               "correct": 0,
-              "explanation": "PAT (Port Address Translation), also known as NAT Overload, maps thousands of internal private IP addresses to one public IP address by assigning unique source port numbers to each session."
+              "explanation": "PAT (Port Address Translation), also known as NAT Overload, maps thousands of internal private IP addresses to one public IP address by assigning unique source port numbers to each session.",
+              "guide": {
+                "keywords": ["multiple private internal IP addresses", "single public IP address", "unique source port numbers"],
+                "ignore": "Ignore internal subnet numbers—focus on port mapping translation.",
+                "elimination": [
+                  "Eliminate Option B (Static 1:1 NAT maps one private IP to one public IP).",
+                  "Eliminate Option C (DHCP relay forwards IP requests across routers)."
+                ],
+                "tippingPoint": "Many private IPs to 1 public IP using ports = PAT (NAT Overload)."
+              }
             },
             {
               "question": "A server administrator needs to connect a enterprise host server directly to a Storage Area Network (SAN) switch over a 10 Gbps optical fiber line. Which expansion card is required?",
@@ -480,7 +819,15 @@
                 "Modem Card"
               ],
               "correct": 0,
-              "explanation": "HBAs (Host Bus Adapters) with optical SFP+ transceivers are specialized expansion cards used to connect high-speed servers to fiber-channel SAN storage networks."
+              "explanation": "HBAs (Host Bus Adapters) with optical SFP+ transceivers are specialized expansion cards used to connect high-speed servers to fiber-channel SAN storage networks.",
+              "guide": {
+                "keywords": ["Storage Area Network (SAN)", "10 Gbps optical fiber line"],
+                "ignore": "Ignore server rack height (1U/2U)—focus on SAN interface cards.",
+                "elimination": [
+                  "Eliminate Option B, C, D (Sound, Video, and Modems cannot connect to fiber SAN switches)."
+                ],
+                "tippingPoint": "Fiber Storage Area Network (SAN) Connection = Host Bus Adapter (HBA)."
+              }
             },
             {
               "question": "A company is upgrading power distribution in its server room. To ensure servers do not immediately shut down during brief brownouts or power grid fluctuations, what device must be installed between utility power and server PSUs?",
@@ -491,7 +838,15 @@
                 "Redundant Cable Tester"
               ],
               "correct": 0,
-              "explanation": "A UPS provides battery backup during utility power drops, filtering line noise and giving administrators time to gracefully shut down systems or ride out brief brownouts."
+              "explanation": "A UPS provides battery backup during utility power drops, filtering line noise and giving administrators time to gracefully shut down systems or ride out brief brownouts.",
+              "guide": {
+                "keywords": ["do not immediately shut down", "brief brownouts or power grid fluctuations"],
+                "ignore": "Ignore server room square footage—focus on power conditioning.",
+                "elimination": [
+                  "Eliminate Option B (Surge protectors suppress high voltage spikes, but offer NO battery power during brownouts)."
+                ],
+                "tippingPoint": "Battery backup during brownouts/blackouts = Uninterruptible Power Supply (UPS)."
+              }
             }
           ]
         },
@@ -506,7 +861,16 @@
                 "Keyboard disconnected"
               ],
               "correct": 0,
-              "explanation": "Beep Code Rule: Beep codes occur before video drivers load during POST. Repeating long beeps consistently indicate missing, unseated, or defective system RAM."
+              "explanation": "Beep Code Rule: Beep codes occur before video drivers load during POST. Repeating long beeps consistently indicate missing, unseated, or defective system RAM.",
+              "guide": {
+                "keywords": ["three long beeps", "no video output", "POST"],
+                "ignore": "Ignore RGB lighting status—focus on audio beep codes.",
+                "elimination": [
+                  "Eliminate Option B (Drive partition errors occur AFTER POST completes, showing OS text errors).",
+                  "Eliminate Option D (Keyboard errors do not cause long beep loops on modern POST)."
+                ],
+                "tippingPoint": "Continuous repeating long beeps during POST = Memory (RAM) issue."
+              }
             },
             {
               "question": "A remote site user reports that their internet connection works, but pings to internal server IP addresses fail intermittently with 50% packet loss. A technician suspects physical wire damage along an exposed floor run. Which diagnostic tool pinpoints the EXACT distance in feet to the wire break?",
@@ -517,7 +881,16 @@
                 "Loopback Adapter"
               ],
               "correct": 0,
-              "explanation": "A TDR (Time-Domain Reflectometer) sends electrical pulses down a cable line and measures the reflection delay to calculate the exact distance to a cable cut or impedance anomaly."
+              "explanation": "A TDR (Time-Domain Reflectometer) sends electrical pulses down a cable line and measures the reflection delay to calculate the exact distance to a cable cut or impedance anomaly.",
+              "guide": {
+                "keywords": ["pinpoints the EXACT distance in feet", "wire break"],
+                "ignore": "Ignore packet loss percentage—focus on tool that measures distance to cable faults.",
+                "elimination": [
+                  "Eliminate Option B (Tone generators help find where a cable ends, but cannot measure distance to internal breaks).",
+                  "Eliminate Option D (Loopback adapters test local port circuitry)."
+                ],
+                "tippingPoint": "Measuring exact distance in feet to a wire break = TDR (Time-Domain Reflectometer)."
+              }
             },
             {
               "question": "A user on a home network cannot connect to a corporate VPN. The VPN client states 'Port 1723 / GRE blocked'. Where must the technician configure port forwarding or pass-through settings?",
@@ -528,7 +901,15 @@
                 "Print Server Controller"
               ],
               "correct": 0,
-              "explanation": "VPN protocols (like PPTP over Port 1723 or IPsec) require specific ports and protocols (GRE/ESP) to pass through perimeter firewalls and SOHO routers."
+              "explanation": "VPN protocols (like PPTP over Port 1723 or IPsec) require specific ports and protocols (GRE/ESP) to pass through perimeter firewalls and SOHO routers.",
+              "guide": {
+                "keywords": ["Port 1723 / GRE blocked", "pass-through settings"],
+                "ignore": "Ignore corporate VPN brand—focus on perimeter device blocking.",
+                "elimination": [
+                  "Eliminate Option B & D (Display managers and Print servers do not filter network ports)."
+                ],
+                "tippingPoint": "Blocked inbound/outbound ports at home = SOHO Router / Firewall Settings."
+              }
             },
             {
               "question": "An administrator wants to secure local physical access to desktop BIOS/UEFI configuration menus so users cannot alter boot order devices or disable Secure Boot. What security measure must be set?",
@@ -539,7 +920,16 @@
                 "WPA3 Passphrase"
               ],
               "correct": 0,
-              "explanation": "Setting a Supervisor/Administrator password in firmware prevents unauthorized users from accessing or modifying BIOS/UEFI settings."
+              "explanation": "Setting a Supervisor/Administrator password in firmware prevents unauthorized users from accessing or modifying BIOS/UEFI settings.",
+              "guide": {
+                "keywords": ["secure local physical access to desktop BIOS/UEFI", "cannot alter boot order"],
+                "ignore": "Ignore Secure Boot details—focus on locking firmware menus.",
+                "elimination": [
+                  "Eliminate Option B (BitLocker encrypts drive data, does not password-lock UEFI menus).",
+                  "Eliminate Option C (Windows admin password applies AFTER the OS boots)."
+                ],
+                "tippingPoint": "Locking firmware setup menus = Supervisor / Admin BIOS Password."
+              }
             },
             {
               "question": "A remote worker's laptop is connected via Wi-Fi. The worker notices that whenever a microwave oven in the breakroom is turned on, their Zoom video call drops completely. What is the cause and resolution?",
@@ -550,7 +940,16 @@
                 "Corrupted NIC driver; reinstall Windows."
               ],
               "correct": 0,
-              "explanation": "Microwave ovens operate in the 2.4 GHz spectrum, causing intense RF interference. Switching to the 5 GHz Wi-Fi spectrum bypasses 2.4 GHz interference."
+              "explanation": "Microwave ovens operate in the 2.4 GHz spectrum, causing intense RF interference. Switching to the 5 GHz Wi-Fi spectrum bypasses 2.4 GHz interference.",
+              "guide": {
+                "keywords": ["whenever a microwave oven is turned on", "Wi-Fi connection drops"],
+                "ignore": "Ignore Zoom application—focus on physical RF frequency interference.",
+                "elimination": [
+                  "Eliminate Option B (Microwaves emit electromagnetic waves, they don't corrupt software DNS caches).",
+                  "Eliminate Option D (Windows OS reinstall is unnecessary for RF interference)."
+                ],
+                "tippingPoint": "Microwave interference = 2.4 GHz RF overlap -> Migrate to 5 GHz."
+              }
             }
           ]
         },

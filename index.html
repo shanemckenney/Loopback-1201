@@ -1,34 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CompTIA A+ 1201 Retake Flight Deck</title>
+  <title>Loopback 1201 — Core 1 Flight Deck</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { 
-      background-color: #0f172a; 
-      color: #f8fafc; 
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; 
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
     }
+  </script>
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/open-dyslexic');
+
+    .dyslexic, .dyslexic * { 
+      font-family: 'OpenDyslexic', sans-serif !important; 
+      line-height: 1.8 !important; 
+      letter-spacing: 0.05em !important; 
+    }
+
+    body { 
+      transition: background-color 0.3s ease, color 0.3s ease; 
+    }
+
     .glass-card { 
-      background: rgba(30, 41, 59, 0.75); 
       backdrop-filter: blur(12px); 
-      border: 1px solid rgba(255, 255, 255, 0.08); 
     }
   </style>
 </head>
-<body class="min-h-screen p-4 md:p-8">
+<body class="min-h-screen p-4 md:p-8 bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 transition-colors">
   <div class="max-w-4xl mx-auto space-y-6">
     
+    <!-- ACCESSIBILITY & INSTRUCTOR CONTROL BAR -->
+    <div class="flex flex-wrap items-center justify-between gap-3 p-3 rounded-2xl bg-white/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 shadow-md">
+      
+      <!-- INSTRUCTOR MODE TOGGLE -->
+      <button id="instructor-btn" onclick="toggleInstructorMode()" 
+        class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition border bg-slate-100 dark:bg-slate-700 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200">
+        <span class="text-base">🧑‍🏫</span>
+        <span>Instructor Lens: <span id="instructor-status">OFF</span></span>
+      </button>
+
+      <!-- ACCESSIBILITY TOGGLES -->
+      <div class="flex items-center gap-2">
+        <!-- Text To Speech Stop -->
+        <button onclick="stopSpeech()" title="Stop Audio" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-xs font-bold transition">
+          🛑 Stop Audio
+        </button>
+
+        <!-- Dyslexia Font Toggle -->
+        <button id="dyslexia-btn" onclick="toggleDyslexiaMode()" title="Toggle Dyslexia Font" 
+          class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-xs font-bold transition border border-slate-300 dark:border-slate-600">
+          📖 Dyslexic Font
+        </button>
+
+        <!-- Dark/Light Theme Toggle -->
+        <button onclick="toggleTheme()" title="Toggle Dark/Light Theme" 
+          class="p-2 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-sm font-bold transition border border-slate-300 dark:border-slate-600">
+          <span class="dark:hidden">🌙 Dark</span>
+          <span class="hidden dark:inline">☀️ Light</span>
+        </button>
+      </div>
+    </div>
+
     <!-- HEADER -->
-    <header class="glass-card rounded-2xl p-6 text-center shadow-2xl">
-      <span class="text-xs font-bold tracking-widest text-cyan-400 uppercase bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-800/50">
+    <header class="glass-card rounded-2xl p-6 text-center shadow-2xl bg-white/70 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700/50">
+      <span class="text-xs font-bold tracking-widest text-cyan-600 dark:text-cyan-400 uppercase bg-cyan-100 dark:bg-cyan-950/60 px-3 py-1 rounded-full border border-cyan-300 dark:border-cyan-800/50">
         CompTIA A+ Core 1 (220-1201)
       </span>
-      <h1 class="text-3xl font-black text-white mt-3 tracking-tight">Daily Micro-Drip Engine</h1>
-      <p class="text-slate-400 text-sm mt-2 max-w-xl mx-auto">
-        10 minutes a day • Mon–Thu • Spaced Repetition for Retake Mastery
+      <h1 class="text-3xl font-black mt-3 tracking-tight text-slate-900 dark:text-white">Loopback 1201</h1>
+      <p class="text-slate-600 dark:text-slate-400 text-sm mt-2 max-w-xl mx-auto">
+        10 minutes a day • Mon–Thu • Spaced Repetition for Retake Success
       </p>
     </header>
 
@@ -39,8 +81,8 @@
     <div id="day-tabs" class="grid grid-cols-4 gap-2"></div>
 
     <!-- MAIN APP CONTAINER -->
-    <main id="app-container" class="glass-card rounded-2xl p-6 shadow-2xl">
-      <div class="text-center text-slate-400 py-12">Loading study materials...</div>
+    <main id="app-container" class="glass-card rounded-2xl p-6 shadow-2xl bg-white/80 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/50">
+      <div class="text-center text-slate-500 dark:text-slate-400 py-12">Loading study materials...</div>
     </main>
     
   </div>
@@ -49,28 +91,103 @@
     let appData = null;
     let currentWeek = 1;
     let currentDay = "Monday";
+    
+    // User Preference States (Persisted via localStorage)
+    let instructorMode = localStorage.getItem('loopback_instructor') === 'true';
+    let dyslexiaMode = localStorage.getItem('loopback_dyslexia') === 'true';
+
+    // Apply saved preferences on boot
+    if (localStorage.getItem('loopback_theme') === 'light') {
+      document.documentElement.classList.remove('dark');
+    }
+    if (dyslexiaMode) {
+      document.body.classList.add('dyslexic');
+    }
 
     // Fetch question bank JSON
     fetch('questions.json')
       .then(res => res.json())
       .then(data => {
         appData = data;
+        updateControlBarUI();
         renderWeekTabs();
         renderDayTabs();
         loadDayContent();
       })
       .catch(err => {
         document.getElementById('app-container').innerHTML = 
-          `<div class="text-rose-400 text-center py-8 font-semibold">
-            Error loading questions.json. Ensure 'questions.json' is in the exact same GitHub directory as index.html.
+          `<div class="text-rose-500 dark:text-rose-400 text-center py-8 font-semibold">
+            Error loading questions.json. Ensure 'questions.json' is in the exact same directory as index.html.
           </div>`;
       });
 
+    // --- ACCESSIBILITY & CONTROL FUNCTIONS ---
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('loopback_theme', isDark ? 'dark' : 'light');
+    }
+
+    function toggleDyslexiaMode() {
+      dyslexiaMode = !dyslexiaMode;
+      document.body.classList.toggle('dyslexic', dyslexiaMode);
+      localStorage.setItem('loopback_dyslexia', dyslexiaMode);
+    }
+
+    function toggleInstructorMode() {
+      instructorMode = !instructorMode;
+      localStorage.setItem('loopback_instructor', instructorMode);
+      updateControlBarUI();
+      loadDayContent();
+    }
+
+    function updateControlBarUI() {
+      const statusEl = document.getElementById('instructor-status');
+      const btnEl = document.getElementById('instructor-btn');
+      if (statusEl && btnEl) {
+        statusEl.innerText = instructorMode ? 'ON' : 'OFF';
+        if (instructorMode) {
+          btnEl.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition border bg-amber-500/20 text-amber-700 dark:text-amber-300 border-amber-500/50 ring-2 ring-amber-500/30";
+        } else {
+          btnEl.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-bold transition border bg-slate-100 dark:bg-slate-700 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200";
+        }
+      }
+    }
+
+    // Web Speech API Text-to-Speech
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.92; // Slightly slower for comprehension
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert("Text-to-speech is not supported in this browser.");
+      }
+    }
+
+    function stopSpeech() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    // Keyword Highlighting Helper
+    function highlightKeywords(text, keywords) {
+      if (!keywords || !keywords.length) return text;
+      let highlighted = text;
+      keywords.forEach(kw => {
+        const regex = new RegExp(`(${kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+        highlighted = highlighted.replace(regex, `<mark class="bg-amber-200 dark:bg-amber-500/40 text-slate-900 dark:text-amber-200 font-bold px-1 rounded border border-amber-400 dark:border-amber-500/60">$1</mark>`);
+      });
+      return highlighted;
+    }
+
+    // --- RENDER FUNCTIONS ---
     function renderWeekTabs() {
       const nav = document.getElementById('week-tabs');
       nav.innerHTML = appData.weeks.map(w => `
         <button onclick="switchWeek(${w.weekNumber})" 
-          class="px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${w.weekNumber === currentWeek ? 'bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/20' : 'bg-slate-800/80 text-slate-400 hover:text-white hover:bg-slate-800'}">
+          class="px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${w.weekNumber === currentWeek ? 'bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/20' : 'bg-slate-200 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'}">
           Week ${w.weekNumber}
         </button>
       `).join('');
@@ -84,9 +201,9 @@
         const isActive = d === currentDay;
         return `
           <button onclick="switchDay('${d}')" 
-            class="py-3 rounded-xl text-sm font-bold text-center transition-all relative ${isActive ? 'bg-slate-800 text-cyan-400 border border-cyan-500/50 shadow-md' : 'bg-slate-900/60 text-slate-400 hover:text-white hover:bg-slate-800/50'}">
+            class="py-3 rounded-xl text-sm font-bold text-center transition-all relative ${isActive ? 'bg-slate-200 dark:bg-slate-800 text-cyan-600 dark:text-cyan-400 border border-cyan-500/50 shadow-md' : 'bg-slate-100 dark:bg-slate-900/60 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'}">
             ${d.substring(0, 3)}
-            ${isCompleted ? '<span class="absolute top-1.5 right-2 text-emerald-400 font-bold text-xs">✓</span>' : ''}
+            ${isCompleted ? '<span class="absolute top-1.5 right-2 text-emerald-500 font-bold text-xs">✓</span>' : ''}
           </button>
         `;
       }).join('');
@@ -96,6 +213,7 @@
     function switchDay(d) { currentDay = d; renderDayTabs(); loadDayContent(); }
 
     function loadDayContent() {
+      stopSpeech();
       const container = document.getElementById('app-container');
       const weekData = appData.weeks.find(w => w.weekNumber === currentWeek);
       const dayData = weekData ? weekData.days[currentDay] : null;
@@ -106,59 +224,102 @@
       }
 
       if (currentDay === "Thursday") {
-        // THURSDAY PBQ CAPSTONE UI
+        // THURSDAY PBQ CAPSTONE
         container.innerHTML = `
           <div class="space-y-5">
-            <div class="inline-block px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-full text-xs font-bold uppercase tracking-wider">
-              Thursday PBQ & Diagnostic Scenario
+            <div class="flex items-center justify-between">
+              <span class="inline-block px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 rounded-full text-xs font-bold uppercase tracking-wider">
+                Thursday PBQ & Diagnostic Scenario
+              </span>
+              <button onclick="speakText('${dayData.title.replace(/'/g, "\\'")} ${dayData.scenario.replace(/\n/g, ' ').replace(/'/g, "\\'")}')" 
+                class="p-1.5 rounded-lg bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-xs font-bold flex items-center gap-1">
+                🔊 Listen
+              </button>
             </div>
-            <h2 class="text-xl font-extrabold text-white">${dayData.title}</h2>
-            <div class="bg-slate-900/80 p-5 rounded-xl text-slate-300 text-sm leading-relaxed border border-slate-800 whitespace-pre-line font-mono">
+
+            <h2 class="text-xl font-extrabold text-slate-900 dark:text-white">${dayData.title}</h2>
+            
+            <div class="bg-slate-100 dark:bg-slate-900/80 p-5 rounded-xl text-slate-800 dark:text-slate-300 text-sm leading-relaxed border border-slate-300 dark:border-slate-800 whitespace-pre-line font-mono">
 ${dayData.scenario}
             </div>
             
             <div class="space-y-3 pt-2">
-              <label class="block text-sm font-semibold text-slate-200">Your Diagnostic Plan & Steps:</label>
-              <textarea id="pbq-response" rows="4" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl p-3.5 text-sm text-slate-200 focus:outline-none focus:border-amber-500 transition" placeholder="Type your diagnostic steps here..."></textarea>
+              <label class="block text-sm font-semibold text-slate-700 dark:text-slate-200">Your Diagnostic Plan & Steps:</label>
+              <textarea id="pbq-response" rows="4" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl p-3.5 text-sm text-slate-900 dark:text-slate-200 focus:outline-none focus:border-amber-500 transition" placeholder="Type your diagnostic steps here..."></textarea>
               <button onclick="submitPBQ()" class="w-full py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 font-bold rounded-xl text-slate-950 text-sm shadow-lg transition">
                 Submit & View Model Solution
               </button>
             </div>
 
-            <div id="pbq-solution" class="hidden mt-6 p-5 bg-emerald-950/40 border border-emerald-500/40 rounded-xl space-y-2">
-              <h4 class="font-bold text-emerald-400 text-sm uppercase tracking-wider">Expert Model Solution:</h4>
-              <p class="text-sm text-emerald-200/90 leading-relaxed whitespace-pre-line">${dayData.solution}</p>
+            <div id="pbq-solution" class="hidden mt-6 p-5 bg-emerald-950/20 dark:bg-emerald-950/40 border border-emerald-500/40 rounded-xl space-y-2">
+              <h4 class="font-bold text-emerald-600 dark:text-emerald-400 text-sm uppercase tracking-wider">Expert Model Solution:</h4>
+              <p class="text-sm text-emerald-900 dark:text-emerald-200/90 leading-relaxed whitespace-pre-line">${dayData.solution}</p>
             </div>
           </div>
         `;
       } else {
-        // MON-WED MICRO QUIZ UI
+        // MON-WED MICRO QUIZ
         container.innerHTML = `
           <div class="space-y-6">
             <div class="flex justify-between items-center">
-              <span class="inline-block px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 rounded-full text-xs font-bold uppercase tracking-wider">
+              <span class="inline-block px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 rounded-full text-xs font-bold uppercase tracking-wider">
                 ${currentDay} Micro-Drip
               </span>
-              <span class="text-xs font-semibold text-slate-400">${dayData.questions.length} Questions</span>
+              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">${dayData.questions.length} Questions</span>
             </div>
             
             <form id="quiz-form" class="space-y-6">
-              ${dayData.questions.map((q, idx) => `
-                <div class="bg-slate-900/50 p-5 rounded-xl border border-slate-800 space-y-3">
-                  <p class="text-sm font-bold text-slate-100 leading-snug">${idx + 1}. ${q.question}</p>
+              ${dayData.questions.map((q, idx) => {
+                const questionText = instructorMode && q.guide ? highlightKeywords(q.question, q.guide.keywords) : q.question;
+                
+                return `
+                <div class="bg-slate-100/80 dark:bg-slate-900/50 p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
+                  
+                  <!-- QUESTION STEM & LISTEN BUTTON -->
+                  <div class="flex items-start justify-between gap-3">
+                    <p class="text-sm font-bold text-slate-900 dark:text-slate-100 leading-snug">
+                      ${idx + 1}. ${questionText}
+                    </p>
+                    <button type="button" onclick="speakText('${q.question.replace(/'/g, "\\'")}')" 
+                      class="shrink-0 p-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-xs font-bold">
+                      🔊
+                    </button>
+                  </div>
+
+                  <!-- INSTRUCTOR MODE OVER-THE-SHOULDER LENS -->
+                  ${instructorMode && q.guide ? `
+                    <div class="p-4 rounded-xl bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/30 space-y-2 text-xs text-slate-800 dark:text-amber-200">
+                      <div class="font-bold text-amber-700 dark:text-amber-300 uppercase tracking-wider flex items-center gap-1">
+                        <span>🧑‍🏫 Instructor Lens Breakdown</span>
+                      </div>
+                      <div><strong>🎯 Key Signals:</strong> ${q.guide.keywords.join(', ')}</div>
+                      <div><strong>🗑️ Noise / Ignore:</strong> ${q.guide.ignore}</div>
+                      <div><strong>✂️ Elimination Strategy:</strong>
+                        <ul class="list-disc list-inside mt-1 space-y-0.5 text-slate-700 dark:text-amber-200/80">
+                          ${q.guide.elimination.map(e => `<li>${e}</li>`).join('')}
+                        </ul>
+                      </div>
+                      <div class="pt-1 border-t border-amber-500/20 text-amber-800 dark:text-amber-300">
+                        <strong>⚖️ The Tipping Point:</strong> ${q.guide.tippingPoint}
+                      </div>
+                    </div>
+                  ` : ''}
+
+                  <!-- OPTIONS -->
                   <div class="space-y-2">
                     ${q.options.map((opt, oIdx) => `
-                      <label class="flex items-center gap-3 p-3 rounded-lg bg-slate-900/80 border border-slate-800/80 hover:border-slate-700 cursor-pointer text-sm text-slate-300 transition">
+                      <label class="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 cursor-pointer text-sm text-slate-800 dark:text-slate-300 transition">
                         <input type="radio" name="q_${idx}" value="${oIdx}" class="text-cyan-500 focus:ring-0">
                         <span>${opt}</span>
                       </label>
                     `).join('')}
                   </div>
-                  <div id="explanation_${idx}" class="hidden p-3.5 rounded-lg text-xs leading-relaxed mt-2 font-medium"></div>
+
+                  <div id="explanation_${idx}" class="hidden p-3.5 rounded-lg text-xs leading-relaxed font-medium"></div>
                 </div>
-              `).join('')}
+              `}).join('')}
               
-              <button type="button" onclick="gradeQuiz()" class="w-full py-3.5 bg-cyan-500 hover:bg-cyan-400 font-bold rounded-xl text-slate-950 text-sm shadow-lg shadow-cyan-500/10 transition">
+              <button type="button" onclick="gradeQuiz()" class="w-full py-3.5 bg-cyan-500 hover:bg-cyan-400 font-bold rounded-xl text-slate-950 text-sm shadow-lg transition">
                 Check Answers
               </button>
             </form>
@@ -177,11 +338,11 @@ ${dayData.scenario}
         expBox.classList.remove('hidden');
 
         if (selected && parseInt(selected.value) === q.correct) {
-          expBox.className = "p-3.5 rounded-lg text-xs leading-relaxed mt-2 bg-emerald-950/60 border border-emerald-500/40 text-emerald-200";
-          expBox.innerHTML = `<strong class="text-emerald-400">✓ Correct!</strong> ${q.explanation}`;
+          expBox.className = "p-3.5 rounded-lg text-xs leading-relaxed mt-2 bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-400 dark:border-emerald-500/40 text-emerald-900 dark:text-emerald-200";
+          expBox.innerHTML = `<strong class="text-emerald-700 dark:text-emerald-400">✓ Correct!</strong> ${q.explanation}`;
         } else {
-          expBox.className = "p-3.5 rounded-lg text-xs leading-relaxed mt-2 bg-rose-950/60 border border-rose-500/40 text-rose-200";
-          expBox.innerHTML = `<strong class="text-rose-400">✗ Incorrect.</strong> Correct answer: <em class="underline">${q.options[q.correct]}</em>.<br><br>${q.explanation}`;
+          expBox.className = "p-3.5 rounded-lg text-xs leading-relaxed mt-2 bg-rose-100 dark:bg-rose-950/60 border border-rose-400 dark:border-rose-500/40 text-rose-900 dark:text-rose-200";
+          expBox.innerHTML = `<strong class="text-rose-700 dark:text-rose-400">✗ Incorrect.</strong> Correct answer: <em class="underline">${q.options[q.correct]}</em>.<br><br>${q.explanation}`;
         }
       });
 
@@ -194,6 +355,18 @@ ${dayData.scenario}
       localStorage.setItem(`w${currentWeek}_${currentDay}_done`, "true");
       renderDayTabs();
     }
+
+    // KEYBOARD ACCESSIBILITY (Option Selection & Submit)
+    document.addEventListener('keydown', (e) => {
+      if (['1', '2', '3', '4'].includes(e.key)) {
+        const activeQuestion = document.querySelector('input[type="radio"]:focus') || document.querySelector('input[type="radio"]');
+        if (activeQuestion) {
+          const qName = activeQuestion.name;
+          const targetRadio = document.querySelector(`input[name="${qName}"][value="${parseInt(e.key) - 1}"]`);
+          if (targetRadio) targetRadio.checked = true;
+        }
+      }
+    });
   </script>
 </body>
 </html>

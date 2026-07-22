@@ -16,7 +16,11 @@
               "correct": 1,
               "explanation": "CompTIA Methodology Trap: Always start with the simplest, least invasive diagnostic step. Reseating or isolating newly added hardware verifies module defect or seating error before jumping to invasive component replacements like BIOS flashing or motherboard replacement.",
               "guide": {
-                "keywords": ["after installing a second SODIMM stick", "screen remains completely black", "FIRST"],
+                "keywords": [
+                  "after installing a second SODIMM stick",
+                  "screen remains completely black",
+                  "FIRST"
+                ],
                 "ignore": "Ignore keyboard LEDs lighting up—that just proves AC/battery power is present.",
                 "elimination": [
                   "Eliminate Option A (Replacing motherboard violates the 'least invasive first' troubleshooting step).",
@@ -36,7 +40,11 @@
               "correct": 1,
               "explanation": "A specialized PSU tester provides immediate pin-by-pin status of the +12V, +5V, +3.3V, and +5VSB rails. A multimeter can measure voltage but requires manual back-probing of 24-pin connectors, making a dedicated PSU tester faster for Tier 1 triage.",
               "guide": {
-                "keywords": ["power delivery issue", "FIRST", "PSU under load"],
+                "keywords": [
+                  "power delivery issue",
+                  "FIRST",
+                  "PSU under load"
+                ],
                 "ignore": "Ignore fan spinning speed—spinning fans only prove the 12V rail has partial power, not that all rails are healthy.",
                 "elimination": [
                   "Eliminate Option C (Loopback plugs test NIC/serial ports, not power).",
@@ -56,7 +64,10 @@
               "correct": 1,
               "explanation": "RAID 1 mirrors data across two drives, offering 1-drive fault tolerance. RAID 0 provides no fault tolerance (a single drive failure destroys the volume). RAID 5 requires a minimum of 3 drives, and RAID 10 requires a minimum of 4 drives.",
               "guide": {
-                "keywords": ["single-drive fault tolerance", "exactly two 2 TB NVMe drives"],
+                "keywords": [
+                  "single-drive fault tolerance",
+                  "exactly two 2 TB NVMe drives"
+                ],
                 "ignore": "Ignore database server branding—focus strictly on disk count (2) and fault tolerance.",
                 "elimination": [
                   "Eliminate Option A (RAID 0 has zero fault tolerance).",
@@ -76,7 +87,11 @@
               "correct": 2,
               "explanation": "Safety Hazard: Bulging trackpads or chassis panels indicate a swollen Lithium-ion battery. Swollen batteries pose severe fire and explosion risks. They must never be punctured, charged, or compressed, and must be safely isolated.",
               "guide": {
-                "keywords": ["trackpad is lifting", "bottom casing is bulging", "immediately"],
+                "keywords": [
+                  "trackpad is lifting",
+                  "bottom casing is bulging",
+                  "immediately"
+                ],
                 "ignore": "Ignore trackpad calibration software—this is a physical thermal safety hazard.",
                 "elimination": [
                   "Eliminate Option A (Compressing a swollen battery causes fire/explosion).",
@@ -96,7 +111,10 @@
               "correct": 2,
               "explanation": "Because the external monitor output is pristine, the GPU is functioning properly. Distortion that changes specifically when moving the physical laptop lid points directly to a damaged or pinched video flex/ribbon cable running through the display hinge.",
               "guide": {
-                "keywords": ["when the lid is adjusted or moved", "external monitor via HDMI looks clean"],
+                "keywords": [
+                  "when the lid is adjusted or moved",
+                  "external monitor via HDMI looks clean"
+                ],
                 "ignore": "Ignore display driver updates—the physical motion triggering the glitch proves a hardware connection issue.",
                 "elimination": [
                   "Eliminate Option A (External monitor works clean, so GPU is healthy).",
@@ -120,7 +138,10 @@
               "correct": 1,
               "explanation": "APIPA Trap: Addresses in the 169.254.0.1 to 169.254.255.254 range are automatically self-assigned by Windows when a client cannot obtain an IP address from a DHCP server. It does NOT indicate a DNS failure.",
               "guide": {
-                "keywords": ["169.254.44.120", "unreachable or failing"],
+                "keywords": [
+                  "169.254.44.120",
+                  "unreachable or failing"
+                ],
                 "ignore": "Ignore network share permissions—focus on IP address assignment.",
                 "elimination": [
                   "Eliminate Option A (DNS handles hostname resolution, not IP lease assignment).",
@@ -140,7 +161,10 @@
               "correct": 1,
               "explanation": "SSH (Secure Shell) uses TCP Port 22 for encrypted command-line management. Port 23 is unencrypted Telnet (security risk), Port 3389 is RDP (Windows graphical), and Port 80 is unencrypted HTTP.",
               "guide": {
-                "keywords": ["secure remote command-line", "Linux web servers"],
+                "keywords": [
+                  "secure remote command-line",
+                  "Linux web servers"
+                ],
                 "ignore": "Ignore 'web servers'—the task specifies remote command-line access, not HTTP web browsing.",
                 "elimination": [
                   "Eliminate Option A (Port 23 is unencrypted Telnet).",
@@ -160,7 +184,10 @@
               "correct": 1,
               "explanation": "In the 2.4 GHz spectrum, only channels 1, 6, and 11 are non-overlapping. Using channel 3 causes partial-frequency overlap and heavy interference from both channel 1 and channel 6 signals.",
               "guide": {
-                "keywords": ["2.4 GHz on Channel 3", "reduce co-channel interference"],
+                "keywords": [
+                  "2.4 GHz on Channel 3",
+                  "reduce co-channel interference"
+                ],
                 "ignore": "Ignore mobile phone brand—focus on 2.4 GHz Wi-Fi channel design rules.",
                 "elimination": [
                   "Eliminate Option A (40 MHz width in 2.4 GHz increases interference).",
@@ -180,7 +207,10 @@
               "correct": 1,
               "explanation": "T568B Pinout: Pin 1: Orange/White, Pin 2: Orange, Pin 3: Green/White, Pin 4: Blue, Pin 5: Blue/White, Pin 6: Green, Pin 7: Brown/White, Pin 8: Brown.",
               "guide": {
-                "keywords": ["T568B wiring standard", "Pin 1 to Pin 8"],
+                "keywords": [
+                  "T568B wiring standard",
+                  "Pin 1 to Pin 8"
+                ],
                 "ignore": "Ignore Cat 6 vs Cat 5e—T568B pinout order is identical.",
                 "elimination": [
                   "Eliminate Option A (Starts with Green/White—that is T568A).",
@@ -200,7 +230,10 @@
               "correct": 1,
               "explanation": "A tone generator connects to one end of the cable to emit an audible tone signal, and the inductive probe is used along walls/patch panels to physically locate and identify that specific wire run.",
               "guide": {
-                "keywords": ["trace the physical cable through the wall", "back to the patch panel"],
+                "keywords": [
+                  "trace the physical cable through the wall",
+                  "back to the patch panel"
+                ],
                 "ignore": "Ignore network card link light status—focus on the task of physical cable tracing.",
                 "elimination": [
                   "Eliminate Option C (Loopback plug tests local port TX/RX, does not trace cables).",
@@ -224,7 +257,11 @@
               "correct": 1,
               "explanation": "Ghosting is caused by a photosensitive drum failing to completely discharge previous electrical charges or a dirty fuser roller retaining residual toner from prior rotations.",
               "guide": {
-                "keywords": ["faint copy", "repeats repeatedly every 3 inches", "ghosting"],
+                "keywords": [
+                  "faint copy",
+                  "repeats repeatedly every 3 inches",
+                  "ghosting"
+                ],
                 "ignore": "Ignore image header content—focus on print artifact repeating distance.",
                 "elimination": [
                   "Eliminate Option C (Pickup rollers feed paper from trays).",
@@ -244,7 +281,10 @@
               "correct": 1,
               "explanation": "Type 1 hypervisors (e.g., VMware ESXi, Microsoft Hyper-V Server, Proxmox) install directly onto the physical hardware bare metal without requiring an underlying host operating system, maximizing performance and resource control.",
               "guide": {
-                "keywords": ["without a host OS installed underneath", "dedicated cluster of physical hardware"],
+                "keywords": [
+                  "without a host OS installed underneath",
+                  "dedicated cluster of physical hardware"
+                ],
                 "ignore": "Ignore count of Windows Server instances (50)—focus on hypervisor installation location.",
                 "elimination": [
                   "Eliminate Option A (Type 2 hypervisors require a host OS like Windows 11 underneath).",
@@ -264,7 +304,11 @@
               "correct": 2,
               "explanation": "IaaS provides fundamental computing infrastructure (VMs, networks, storage). The customer maintains the guest OS, applications, and network configs, while the provider manages physical hardware.",
               "guide": {
-                "keywords": ["provisions virtual servers", "installs custom databases", "does not manage underlying physical hypervisor"],
+                "keywords": [
+                  "provisions virtual servers",
+                  "installs custom databases",
+                  "does not manage underlying physical hypervisor"
+                ],
                 "ignore": "Ignore datacenter cooling mention—focus on customer managing OS/VM layer.",
                 "elimination": [
                   "Eliminate Option A (SaaS provides ready-to-use software like Office 365).",
@@ -284,7 +328,11 @@
               "correct": 1,
               "explanation": "Direct thermal printers use heat-sensitive paper and no toner/ink/ribbon. Faded or incomplete prints are typically caused by dirt, wax, or adhesive buildup on the heating elements of the thermal printhead.",
               "guide": {
-                "keywords": ["thermal printer", "No ink or toner is used", "FIRST"],
+                "keywords": [
+                  "thermal printer",
+                  "No ink or toner is used",
+                  "FIRST"
+                ],
                 "ignore": "Ignore warehouse location—focus on printer technology mechanics.",
                 "elimination": [
                   "Eliminate Option A & C (Corona wires and fusers are laser printer parts).",
@@ -304,7 +352,10 @@
               "correct": 1,
               "explanation": "`ping` uses ICMP Echo Request messages to verify basic network connectivity and measure latency (round-trip time in milliseconds).",
               "guide": {
-                "keywords": ["reachable", "measure the round-trip latency"],
+                "keywords": [
+                  "reachable",
+                  "measure the round-trip latency"
+                ],
                 "ignore": "Ignore server OS type—ICMP ping works universally.",
                 "elimination": [
                   "Eliminate Option A (nslookup tests DNS resolution).",
@@ -316,9 +367,99 @@
           ]
         },
         "Thursday": {
-          "title": "PBQ Scenario 1: SOHO Wireless Router Security & Network GUI Setup",
-          "scenario": "You are configuring a new SOHO Wireless Router for a small medical clinic. The manager requires the following operational and security specs:\n\n1. Modern, highly secure Wi-Fi encryption for staff workstations.\n2. Guest Wi-Fi access for patients that completely isolates guest traffic from internal electronic health record (EHR) servers.\n3. Automatic IP assignment for up to 30 staff devices in the range 192.168.10.100 through 192.168.10.130.\n4. Prevention of unauthorized Wi-Fi connections, even if someone obtains the Wi-Fi passphrase.\n\nReview the required GUI configuration parameters and document the exact settings needed in each section.",
-          "solution": "1. Wireless Security Settings:\n   - Security Mode: WPA3-Personal (SAE)\n   - Encryption: AES / GCMP\n\n2. Guest Network Settings:\n   - Guest Network: ENABLED\n   - Guest SSID: Clinic-Guest\n   - Access Control / Isolation: ENABLE 'Isolate Guest Traffic' / 'Block Guest Access to Local Network'\n\n3. DHCP Server Settings:\n   - IP Address Scope / Start IP: 192.168.10.100\n   - End IP / Client Limit: 192.168.10.130 (Max 30 Users)\n   - Subnet Mask: 255.255.255.0\n\n4. Access Control / MAC Filtering:\n   - Wireless MAC Filtering: ENABLED\n   - Filtering Rule: 'Allow Only Listed MAC Addresses' (Whitelist Mode)"
+          "title": "SOHO Wireless Router Configuration",
+          "type": "router-sim",
+          "scenario": "Clinic Manager Deployment Request:\n\nWe just unboxed our new office wireless access point, but it's completely wide open. Secure it using these specific constraints:\n• Change the default administrator management credentials to: ClinicAdmin!99\n• Change our network SSID name to Clinic-Net.\n• Deploy the absolute most secure modern encryption protocol available that does not require an external corporate authentication server.\n• Assign the security passphrase to: HealthSecure123\n• Neighboring offices are causing interference; switch the 2.4GHz spectrum to a standard, non-overlapping channel.\n• Strict HIPAA compliance: Enable hardware access rules ensuring only the manager's tablet device (MAC Address: 00:1A:2B:3C:4D:5E) is whitelisted to join the wireless channel.",
+          "sim": {
+            "defaults": {
+              "adminPass": "password",
+              "ssid": "default",
+              "channel": "auto",
+              "security": "none",
+              "wifiPass": "",
+              "macToggle": "disabled",
+              "macRule": "block",
+              "macTarget": ""
+            },
+            "checks": [
+              {
+                "name": "Management Security Credentials",
+                "why": "The saved administrator password does not match the ticket parameters: 'ClinicAdmin!99'. Router changes must be explicitly saved via the firmware panel before submission.",
+                "cond": {
+                  "field": "adminPass",
+                  "equals": "ClinicAdmin!99"
+                }
+              },
+              {
+                "name": "SSID Identifier Reassignment",
+                "why": "The access point must explicitly save the target broadcast network name 'Clinic-Net'.",
+                "cond": {
+                  "field": "ssid",
+                  "equals": "Clinic-Net"
+                }
+              },
+              {
+                "name": "Frequency Optimization (Non-Overlapping Trap)",
+                "why": "Channels 1, 6, and 11 are the only non-overlapping options in the 2.4GHz spectrum. Other choices pick up environmental interference.",
+                "cond": {
+                  "field": "channel",
+                  "in": [
+                    "1",
+                    "6",
+                    "11"
+                  ]
+                }
+              },
+              {
+                "name": "Modern Wireless Encryption Configuration",
+                "why": "WPA3 Personal provides peak modern encryption for standard setups without requiring an external 802.1X enterprise RADIUS server.",
+                "cond": {
+                  "field": "security",
+                  "equals": "wpa3-p"
+                }
+              },
+              {
+                "name": "Wireless Passphrase Entry Verification",
+                "why": "The saved wireless password must exactly match the parameters: 'HealthSecure123'.",
+                "cond": {
+                  "field": "wifiPass",
+                  "equals": "HealthSecure123"
+                }
+              },
+              {
+                "name": "MAC Layer Filter Status",
+                "why": "Hardware filtering tables require the firewall state to be explicitly saved as 'Enabled'.",
+                "cond": {
+                  "field": "macToggle",
+                  "equals": "enabled"
+                }
+              },
+              {
+                "name": "Firewall Policy Routing (The Whitelist Trap)",
+                "why": "Setting the rule policy to 'Block' locks out the designated user. The firewall mode must be configured to 'Allow listed systems'.",
+                "cond": {
+                  "all": [
+                    {
+                      "field": "macToggle",
+                      "equals": "enabled"
+                    },
+                    {
+                      "field": "macRule",
+                      "equals": "allow"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "Hardware Access Address Validation",
+                "why": "The committed security table does not contain the manager's tablet device hardware address: '00:1A:2B:3C:4D:5E'.",
+                "cond": {
+                  "field": "macTarget",
+                  "equals": "001A2B3C4D5E"
+                }
+              }
+            ]
+          }
         }
       }
     },
@@ -338,7 +479,11 @@
               "correct": 1,
               "explanation": "Symptom Analysis: Thermal protection safeguards shut down the CPU when safe temperature thresholds are breached. The system boots after cooling down for 30 minutes, confirming thermal shutdown (e.g., dried thermal paste, failed pump, or detached heatsink).",
               "guide": {
-                "keywords": ["shuts down abruptly", "turned back on immediately powers off", "left off for 30 minutes boots normally"],
+                "keywords": [
+                  "shuts down abruptly",
+                  "turned back on immediately powers off",
+                  "left off for 30 minutes boots normally"
+                ],
                 "ignore": "Ignore HD rendering application—focus on temperature time cycle.",
                 "elimination": [
                   "Eliminate Option A (Software corruption doesn't fix itself by waiting 30 mins).",
@@ -358,7 +503,10 @@
               "correct": 2,
               "explanation": "M Key M.2 slots utilize up to 4 PCIe lanes (PCIe x4), enabling maximum transfer speeds for NVMe SSDs. B Key slots use PCIe x2 / SATA.",
               "guide": {
-                "keywords": ["M.2 slot keying", "x4 PCIe lanes for NVMe"],
+                "keywords": [
+                  "M.2 slot keying",
+                  "x4 PCIe lanes for NVMe"
+                ],
                 "ignore": "Ignore motherboard brand—focus on M.2 keying definitions.",
                 "elimination": [
                   "Eliminate Option A & B (A and E keys are used for Wi-Fi/Bluetooth cards).",
@@ -378,7 +526,10 @@
               "correct": 1,
               "explanation": "The CR2032 CMOS battery maintains volatile CMOS memory and keeps the Real-Time Clock (RTC) running when AC power is disconnected.",
               "guide": {
-                "keywords": ["unplugged from the wall", "system time resets to January 1, 2000"],
+                "keywords": [
+                  "unplugged from the wall",
+                  "system time resets to January 1, 2000"
+                ],
                 "ignore": "Ignore browser certificate warnings—clock reset causes certificate date verification failures.",
                 "elimination": [
                   "Eliminate Option A (PSU provides AC to DC power, does not hold time state).",
@@ -398,7 +549,10 @@
               "correct": 1,
               "explanation": "Thunderbolt 4 delivers 40 Gbps bidirectional throughput, capable of driving multiple high-resolution 4K displays alongside USB data, audio, and high-power delivery over a single Type-C cable.",
               "guide": {
-                "keywords": ["three 4K displays", "single cable connection"],
+                "keywords": [
+                  "three 4K displays",
+                  "single cable connection"
+                ],
                 "ignore": "Ignore keyboard and mouse bandwidth—displays dominate throughput requirements.",
                 "elimination": [
                   "Eliminate Option A (USB 3.0 Type-A lacks bandwidth for three 4K monitors).",
@@ -418,7 +572,10 @@
               "correct": 1,
               "explanation": "Without Auto-MDIX (which automatically adjusts pin functions), connecting two like networking devices (PC-to-PC, or Switch-to-Switch) directly requires a Crossover Cable to swap the Transmit (TX) and Receive (RX) pairs.",
               "guide": {
-                "keywords": ["connect two PCs directly", "do not support Auto-MDIX"],
+                "keywords": [
+                  "connect two PCs directly",
+                  "do not support Auto-MDIX"
+                ],
                 "ignore": "Ignore file transfer protocol—focus on Layer 1 physical pinouts.",
                 "elimination": [
                   "Eliminate Option A (Straight-through connects unlike devices e.g. PC to Switch).",
@@ -442,7 +599,11 @@
               "correct": 0,
               "explanation": "If a switch port is misassigned to an isolated or incorrect VLAN, the client will be logically separated from the default gateway's broadcast domain, preventing local and external routing despite physical link connectivity.",
               "guide": {
-                "keywords": ["link light turns green", "pinging default gateway times out", "managed switch port"],
+                "keywords": [
+                  "link light turns green",
+                  "pinging default gateway times out",
+                  "managed switch port"
+                ],
                 "ignore": "Ignore 'newly built computer'—focus on switch configuration mismatch.",
                 "elimination": [
                   "Eliminate Option B (Half-duplex causes slow speed/collisions, not ping timeouts).",
@@ -462,7 +623,10 @@
               "correct": 1,
               "explanation": "PoE+ (IEEE 802.3at) supplies up to 30 Watts of power per port, accommodating power requirements over 15.4W (which was the limit for legacy 802.3af PoE).",
               "guide": {
-                "keywords": ["25 Watts of power", "via Ethernet cabling"],
+                "keywords": [
+                  "25 Watts of power",
+                  "via Ethernet cabling"
+                ],
                 "ignore": "Ignore camera video resolution—focus strictly on wattage requirements.",
                 "elimination": [
                   "Eliminate Option A (Legacy 802.3af maxes out at 15.4 Watts).",
@@ -482,7 +646,11 @@
               "correct": 1,
               "explanation": "Classic CompTIA Diagnostic Rule: If reaching a host via IP address works, but reaching it via hostname fails, the issue is DNS resolution.",
               "guide": {
-                "keywords": ["http://internalhr fails", "http://10.0.4.50 opens page immediately", "FIRST"],
+                "keywords": [
+                  "http://internalhr fails",
+                  "http://10.0.4.50 opens page immediately",
+                  "FIRST"
+                ],
                 "ignore": "Ignore web browser brand—focus on resolution layer.",
                 "elimination": [
                   "Eliminate Option A & C (IP routing works fine as proven by 10.0.4.50 loading)."
@@ -501,7 +669,10 @@
               "correct": 1,
               "explanation": "An IP address conflict causes ARP table flapping on switches/routers, leading to dropped packets, loss of session state, and diagnostic OS error popups.",
               "guide": {
-                "keywords": ["exact same IP address", "symptom occurs"],
+                "keywords": [
+                  "exact same IP address",
+                  "symptom occurs"
+                ],
                 "ignore": "Ignore machine chassis type—focus on Layer 3 ARP table conflicts.",
                 "elimination": [
                   "Eliminate Option A (APIPA only triggers if DHCP request fails, not on static duplicate).",
@@ -521,7 +692,10 @@
               "correct": 1,
               "explanation": "`netstat` (Network Statistics) displays active TCP connections, listening ports, network statistics, and routing tables.",
               "guide": {
-                "keywords": ["active TCP connections", "listening ports"],
+                "keywords": [
+                  "active TCP connections",
+                  "listening ports"
+                ],
                 "ignore": "Ignore Windows version—netstat syntax is constant.",
                 "elimination": [
                   "Eliminate Option A (tracert traces network hops).",
@@ -545,7 +719,11 @@
               "correct": 1,
               "explanation": "High I/O wait times despite low CPU/RAM usage indicate a disk storage bottleneck. Moving from mechanical hard drives to high-IOPS NVMe SSD storage resolves VM disk queue delays.",
               "guide": {
-                "keywords": ["CPU 15%", "RAM 40%", "Storage I/O wait times are extremely high"],
+                "keywords": [
+                  "CPU 15%",
+                  "RAM 40%",
+                  "Storage I/O wait times are extremely high"
+                ],
                 "ignore": "Ignore accounting software brand—focus on performance metric bottleneck.",
                 "elimination": [
                   "Eliminate Option A & D (CPU and RAM are barely utilized at 15% and 40%).",
@@ -565,7 +743,10 @@
               "correct": 1,
               "explanation": "A VM Snapshot captures the exact state, memory, and disk status of a virtual machine at a specific point in time, enabling instant rollback if updates cause failures.",
               "guide": {
-                "keywords": ["save the current running state", "instantly reverted"],
+                "keywords": [
+                  "save the current running state",
+                  "instantly reverted"
+                ],
                 "ignore": "Ignore OS patch details—focus on virtualization management features.",
                 "elimination": [
                   "Eliminate Option A (Cloning creates a permanent duplicate VM, not a point-in-time state rollback).",
@@ -585,7 +766,10 @@
               "correct": 1,
               "explanation": "A Community Cloud is shared specifically by organizations that have mutual security, compliance, or operational requirements.",
               "guide": {
-                "keywords": ["shared exclusively among five vetted banking institutions", "compliance standards"],
+                "keywords": [
+                  "shared exclusively among five vetted banking institutions",
+                  "compliance standards"
+                ],
                 "ignore": "Ignore specific financial data types—focus on cloud sharing definitions.",
                 "elimination": [
                   "Eliminate Option A (Public cloud is open to general public).",
@@ -605,7 +789,10 @@
               "correct": 0,
               "explanation": "Vertical black lines running down the entire page indicate a scratched or dirty photosensitive drum, or a dirty primary corona/charge wire depositing continuous lines of toner.",
               "guide": {
-                "keywords": ["vertical black lines", "running down every page"],
+                "keywords": [
+                  "vertical black lines",
+                  "running down every page"
+                ],
                 "ignore": "Ignore document text—focus on print defect patterns.",
                 "elimination": [
                   "Eliminate Option B (Empty toner causes faint pages, not black lines).",
@@ -625,7 +812,12 @@
               "correct": 2,
               "explanation": "Resource Math: (3 VMs × 8 GB RAM) = 24 GB for guests. Adding 8 GB for the host OS equals 32 GB RAM total.",
               "guide": {
-                "keywords": ["three concurrent guest VMs", "each requiring 8 GB", "host OS requires 8 GB", "MINIMUM"],
+                "keywords": [
+                  "three concurrent guest VMs",
+                  "each requiring 8 GB",
+                  "host OS requires 8 GB",
+                  "MINIMUM"
+                ],
                 "ignore": "Ignore developer OS environment—do the basic multiplication and addition.",
                 "elimination": [
                   "Eliminate Option A & B (16 GB and 24 GB will starve the host OS or crash VMs)."
@@ -658,7 +850,10 @@
               "correct": 1,
               "explanation": "CompTIA 6-Step Order: 1) Identify problem, 2) Establish theory of probable cause, 3) Test theory to determine cause, 4) Establish plan of action & implement solution, 5) Verify full system functionality, 6) Document findings.",
               "guide": {
-                "keywords": ["CompTIA 6-Step", "IMMEDIATELY after establishing a theory"],
+                "keywords": [
+                  "CompTIA 6-Step",
+                  "IMMEDIATELY after establishing a theory"
+                ],
                 "ignore": "Ignore real-world shortcuts—CompTIA requires strict adherence to their 6-step order.",
                 "elimination": [
                   "Eliminate Option A (Documentation is Step 6, the final step).",
@@ -678,7 +873,11 @@
               "correct": 1,
               "explanation": "CompTIA Tier 1 Mobile Fix: Debris or lint compacted inside lightning/USB-C charging ports prevents full physical seating of charging cable pins. Inspecting and cleaning with a wooden/plastic pick is the least invasive, most effective first step.",
               "guide": {
-                "keywords": ["disconnects unless cable held at an angle", "tests three working cables", "FIRST"],
+                "keywords": [
+                  "disconnects unless cable held at an angle",
+                  "tests three working cables",
+                  "FIRST"
+                ],
                 "ignore": "Ignore OS settings—physical port loose connection is a hardware fit issue.",
                 "elimination": [
                   "Eliminate Option A & C (Replacing board or battery before inspecting port violates simple fix rules).",
@@ -698,7 +897,10 @@
               "correct": 0,
               "explanation": "Sudden heat generation and rapid battery drain are typically caused by misbehaving background applications stuck in processing loops, causing continuous CPU utilization.",
               "guide": {
-                "keywords": ["extremely hot to the touch", "drains from 100% to 0% in under two hours"],
+                "keywords": [
+                  "extremely hot to the touch",
+                  "drains from 100% to 0% in under two hours"
+                ],
                 "ignore": "Ignore hardware replacements initially—check software background tasks first.",
                 "elimination": [
                   "Eliminate Option B (Screens don't generate sudden excessive heat loops).",
@@ -718,7 +920,10 @@
               "correct": 0,
               "explanation": "When touch inputs register inaccurately across a display, running the built-in digitizer calibration tool aligns spatial coordinates.",
               "guide": {
-                "keywords": ["registers touches 2 inches away", "actually taps"],
+                "keywords": [
+                  "registers touches 2 inches away",
+                  "actually taps"
+                ],
                 "ignore": "Ignore screen glass cleanliness—this is a spatial coordinate mapping issue.",
                 "elimination": [
                   "Eliminate Option B & D (GPU and Backlight affect image display, not touch input mapping)."
@@ -737,7 +942,10 @@
               "correct": 0,
               "explanation": "NFC operates over very short distances (under 4 cm / 1.5 inches), securing contactless mobile payment transactions (e.g., Apple Pay, Google Pay).",
               "guide": {
-                "keywords": ["contactless payments", "within 4 centimeters"],
+                "keywords": [
+                  "contactless payments",
+                  "within 4 centimeters"
+                ],
                 "ignore": "Ignore smartphone OS—payment chip standards are identical.",
                 "elimination": [
                   "Eliminate Option B (Infrared requires direct line-of-sight optical beam).",
@@ -761,7 +969,10 @@
               "correct": 0,
               "explanation": "CAD/CAM Workstation Requirements: Complex 3D rendering and vector geometry demand high multicore processing performance paired with dedicated workstation-grade GPUs.",
               "guide": {
-                "keywords": ["CAD/CAM engineering designer", "highest prioritization"],
+                "keywords": [
+                  "CAD/CAM engineering designer",
+                  "highest prioritization"
+                ],
                 "ignore": "Ignore case design—focus on computational rendering requirements.",
                 "elimination": [
                   "Eliminate Option B (Liquid nitrogen is for extreme overclocking, not enterprise CAD).",
@@ -781,7 +992,10 @@
               "correct": 0,
               "explanation": "NAS deployments run continuously (24/7/365) with high multi-user access loads, requiring specialized NAS-rated drives built for vibration resistance and heavy duty cycles.",
               "guide": {
-                "keywords": ["Network Attached Storage (NAS)", "file sharing"],
+                "keywords": [
+                  "Network Attached Storage (NAS)",
+                  "file sharing"
+                ],
                 "ignore": "Ignore business industry type—focus on drive duty cycle specs.",
                 "elimination": [
                   "Eliminate Option C (IDE is an obsolete 1990s parallel ribbon standard).",
@@ -801,7 +1015,11 @@
               "correct": 0,
               "explanation": "PAT (Port Address Translation), also known as NAT Overload, maps thousands of internal private IP addresses to one public IP address by assigning unique source port numbers to each session.",
               "guide": {
-                "keywords": ["multiple private internal IP addresses", "single public IP address", "unique source port numbers"],
+                "keywords": [
+                  "multiple private internal IP addresses",
+                  "single public IP address",
+                  "unique source port numbers"
+                ],
                 "ignore": "Ignore internal subnet numbers—focus on port mapping translation.",
                 "elimination": [
                   "Eliminate Option B (Static 1:1 NAT maps one private IP to one public IP).",
@@ -821,7 +1039,10 @@
               "correct": 0,
               "explanation": "HBAs (Host Bus Adapters) with optical SFP+ transceivers are specialized expansion cards used to connect high-speed servers to fiber-channel SAN storage networks.",
               "guide": {
-                "keywords": ["Storage Area Network (SAN)", "10 Gbps optical fiber line"],
+                "keywords": [
+                  "Storage Area Network (SAN)",
+                  "10 Gbps optical fiber line"
+                ],
                 "ignore": "Ignore server rack height (1U/2U)—focus on SAN interface cards.",
                 "elimination": [
                   "Eliminate Option B, C, D (Sound, Video, and Modems cannot connect to fiber SAN switches)."
@@ -840,7 +1061,10 @@
               "correct": 0,
               "explanation": "A UPS provides battery backup during utility power drops, filtering line noise and giving administrators time to gracefully shut down systems or ride out brief brownouts.",
               "guide": {
-                "keywords": ["do not immediately shut down", "brief brownouts or power grid fluctuations"],
+                "keywords": [
+                  "do not immediately shut down",
+                  "brief brownouts or power grid fluctuations"
+                ],
                 "ignore": "Ignore server room square footage—focus on power conditioning.",
                 "elimination": [
                   "Eliminate Option B (Surge protectors suppress high voltage spikes, but offer NO battery power during brownouts)."
@@ -863,7 +1087,11 @@
               "correct": 0,
               "explanation": "Beep Code Rule: Beep codes occur before video drivers load during POST. Repeating long beeps consistently indicate missing, unseated, or defective system RAM.",
               "guide": {
-                "keywords": ["three long beeps", "no video output", "POST"],
+                "keywords": [
+                  "three long beeps",
+                  "no video output",
+                  "POST"
+                ],
                 "ignore": "Ignore RGB lighting status—focus on audio beep codes.",
                 "elimination": [
                   "Eliminate Option B (Drive partition errors occur AFTER POST completes, showing OS text errors).",
@@ -883,7 +1111,10 @@
               "correct": 0,
               "explanation": "A TDR (Time-Domain Reflectometer) sends electrical pulses down a cable line and measures the reflection delay to calculate the exact distance to a cable cut or impedance anomaly.",
               "guide": {
-                "keywords": ["pinpoints the EXACT distance in feet", "wire break"],
+                "keywords": [
+                  "pinpoints the EXACT distance in feet",
+                  "wire break"
+                ],
                 "ignore": "Ignore packet loss percentage—focus on tool that measures distance to cable faults.",
                 "elimination": [
                   "Eliminate Option B (Tone generators help find where a cable ends, but cannot measure distance to internal breaks).",
@@ -903,7 +1134,10 @@
               "correct": 0,
               "explanation": "VPN protocols (like PPTP over Port 1723 or IPsec) require specific ports and protocols (GRE/ESP) to pass through perimeter firewalls and SOHO routers.",
               "guide": {
-                "keywords": ["Port 1723 / GRE blocked", "pass-through settings"],
+                "keywords": [
+                  "Port 1723 / GRE blocked",
+                  "pass-through settings"
+                ],
                 "ignore": "Ignore corporate VPN brand—focus on perimeter device blocking.",
                 "elimination": [
                   "Eliminate Option B & D (Display managers and Print servers do not filter network ports)."
@@ -922,7 +1156,10 @@
               "correct": 0,
               "explanation": "Setting a Supervisor/Administrator password in firmware prevents unauthorized users from accessing or modifying BIOS/UEFI settings.",
               "guide": {
-                "keywords": ["secure local physical access to desktop BIOS/UEFI", "cannot alter boot order"],
+                "keywords": [
+                  "secure local physical access to desktop BIOS/UEFI",
+                  "cannot alter boot order"
+                ],
                 "ignore": "Ignore Secure Boot details—focus on locking firmware menus.",
                 "elimination": [
                   "Eliminate Option B (BitLocker encrypts drive data, does not password-lock UEFI menus).",
@@ -942,7 +1179,10 @@
               "correct": 0,
               "explanation": "Microwave ovens operate in the 2.4 GHz spectrum, causing intense RF interference. Switching to the 5 GHz Wi-Fi spectrum bypasses 2.4 GHz interference.",
               "guide": {
-                "keywords": ["whenever a microwave oven is turned on", "Wi-Fi connection drops"],
+                "keywords": [
+                  "whenever a microwave oven is turned on",
+                  "Wi-Fi connection drops"
+                ],
                 "ignore": "Ignore Zoom application—focus on physical RF frequency interference.",
                 "elimination": [
                   "Eliminate Option B (Microwaves emit electromagnetic waves, they don't corrupt software DNS caches).",
